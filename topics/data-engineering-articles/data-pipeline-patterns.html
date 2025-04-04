@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Essential design patterns for building resilient data pipelines that gracefully handle failures, scale with growing data volumes, and adapt to changing requirements">
+    <title>Data Pipeline Design Patterns for Reliability - TechPOV</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/article.css">
+    <link rel="icon" href="../../favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="../data-engineering.html" class="active">Data Engineering</a></li>
+                    <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="../mlops.html">MLOps</a></li>
+                    <li><a href="../data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container article-container">
+        <article class="article-content">
+            <div class="article-header">
+                <h1>Data Pipeline Design Patterns for Reliability</h1>
+                <div class="article-meta">
+                    <div class="author-date">
+                        <span class="author">By Michael Chen</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Data Engineering</span>
+                        <span class="tag">Reliability</span>
+                        <span class="tag">Design Patterns</span>
+                        <span class="tag">Fault Tolerance</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-of-contents">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#idempotency">Idempotency Pattern</a></li>
+                    <li><a href="#circuit-breaker">Circuit Breaker Pattern</a></li>
+                    <li><a href="#dead-letter-queue">Dead Letter Queue Pattern</a></li>
+                    <li><a href="#checkpointing">Checkpointing Pattern</a></li>
+                    <li><a href="#retry">Retry and Backoff Pattern</a></li>
+                    <li><a href="#transactional-outbox">Transactional Outbox Pattern</a></li>
+                    <li><a href="#implementation-example">Implementation Example</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>Data pipelines form the backbone of modern data-driven organizations, but they often become single points of failure in the data infrastructure. Building reliable data pipelines requires careful implementation of design patterns that handle failures gracefully, scale with growing data volumes, and adapt to changing upstream and downstream requirements.</p>
+                
+                <p>This article explores essential design patterns that can dramatically improve the reliability of your data pipelines. Each pattern addresses specific failure modes and operational challenges that data engineers face when building production systems.</p>
+
+                <div class="note">
+                    <strong>Key Challenge:</strong> According to a 2022 survey by Gartner, 68% of data engineering teams cite pipeline reliability as their top operational concern, ahead of performance and cost optimization.
+                </div>
+            </section>
+
+            <section id="idempotency">
+                <h2>Idempotency Pattern</h2>
+                <p>Idempotency is perhaps the most fundamental reliability pattern for data pipelines. An idempotent operation can be applied multiple times without changing the result beyond the initial application.</p>
+
+                <h3>Implementation Strategies</h3>
+                <ul>
+                    <li><strong>Natural Keys:</strong> Use natural business keys rather than auto-incrementing IDs for data identification.</li>
+                    <li><strong>Deduplication:</strong> Implement deduplication logic using unique identifier tracking.</li>
+                    <li><strong>Exactly-once Semantics:</strong> Leverage frameworks that provide exactly-once processing guarantees.</li>
+                </ul>
+
+                <div class="code-example">
+                    <pre><code>-- SQL example of an idempotent merge operation
+MERGE INTO target t
+USING source s
+ON t.business_key = s.business_key
+WHEN MATCHED AND (t.col1 != s.col1 OR t.col2 != s.col2) THEN
+  UPDATE SET t.col1 = s.col1, t.col2 = s.col2, t.updated_at = CURRENT_TIMESTAMP()
+WHEN NOT MATCHED THEN
+  INSERT (business_key, col1, col2, created_at, updated_at)
+  VALUES (s.business_key, s.col1, s.col2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());</code></pre>
+                </div>
+
+                <p>When implemented properly, idempotent operations allow you to safely retry failed jobs, reprocess data, or run backfills without creating duplicates or inconsistencies.</p>
+            </section>
+
+            <section id="circuit-breaker">
+                <h2>Circuit Breaker Pattern</h2>
+                <p>The circuit breaker pattern prevents cascade failures by failing fast when dependent systems are experiencing issues. It's particularly useful for data pipelines that interact with multiple external systems.</p>
+
+                <div class="diagram">
+                    <svg viewBox="0 0 600 200" width="100%" height="auto">
+                        <rect x="50" y="50" width="500" height="100" rx="10" ry="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                        
+                        <!-- Closed State -->
+                        <rect x="80" y="80" width="100" height="40" rx="5" ry="5" fill="#dcfce7" stroke="#86efac" stroke-width="2"/>
+                        <text x="130" y="105" font-size="14" text-anchor="middle">CLOSED</text>
+                        
+                        <!-- Open State -->
+                        <rect x="250" y="80" width="100" height="40" rx="5" ry="5" fill="#fee2e2" stroke="#fca5a5" stroke-width="2"/>
+                        <text x="300" y="105" font-size="14" text-anchor="middle">OPEN</text>
+                        
+                        <!-- Half-Open State -->
+                        <rect x="420" y="80" width="100" height="40" rx="5" ry="5" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+                        <text x="470" y="105" font-size="14" text-anchor="middle">HALF-OPEN</text>
+                        
+                        <!-- Arrows -->
+                        <line x1="180" y1="100" x2="250" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="215" y="90" font-size="12" text-anchor="middle">Failures exceed threshold</text>
+                        
+                        <line x1="300" y1="120" x2="300" y2="140" stroke="#64748b" stroke-width="2"/>
+                        <line x1="300" y1="140" x2="470" y2="140" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="385" y="155" font-size="12" text-anchor="middle">Timeout period elapses</text>
+                        
+                        <line x1="420" y1="100" x2="350" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="385" y="90" font-size="12" text-anchor="middle">Trial request fails</text>
+                        
+                        <line x1="470" y1="80" x2="470" y2="60" stroke="#64748b" stroke-width="2"/>
+                        <line x1="470" y1="60" x2="130" y2="60" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <text x="300" y="45" font-size="12" text-anchor="middle">Trial request succeeds</text>
+                        
+                        <!-- Arrow marker definition -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                    <div class="diagram-caption">Circuit Breaker State Transitions</div>
+                </div>
+
+                <h3>Implementation Example</h3>
+                <div class="code-example">
+                    <pre><code>from pyfailsafe import CircuitBreaker, RetryPolicy, Timeout
+
+breaker = CircuitBreaker(
+    maximum_failures=3,
+    reset_timeout_seconds=60
+)
+
+async def fetch_data_with_circuit_breaker():
+    async with breaker:
+        # If the circuit is open, this will raise a CircuitBreakerError
+        return await api_client.fetch_data()</code></pre>
+                </div>
+            </section>
+
+            <section id="dead-letter-queue">
+                <h2>Dead Letter Queue Pattern</h2>
+                <p>The dead letter queue (DLQ) pattern captures messages that cannot be processed successfully after multiple attempts, instead of losing them. This allows for later inspection, debugging, and potential reprocessing.</p>
+
+                <h3>Key Components</h3>
+                <ul>
+                    <li><strong>Primary Processing Queue:</strong> Where messages are initially sent for processing</li>
+                    <li><strong>Dead Letter Queue:</strong> Where failed messages are moved after exhausting retry attempts</li>
+                    <li><strong>Routing Logic:</strong> Rules that determine when to move messages to the DLQ</li>
+                    <li><strong>Monitoring:</strong> Alerts when messages are sent to the DLQ</li>
+                    <li><strong>Reprocessing Mechanism:</strong> Tools to fix and replay messages from the DLQ</li>
+                </ul>
+
+                <div class="note">
+                    <strong>Best Practice:</strong> Store the original message payload, error details, timestamp, and retry count in your DLQ to facilitate effective debugging and reprocessing.
+                </div>
+            </section>
+
+            <section id="checkpointing">
+                <h2>Checkpointing Pattern</h2>
+                <p>Checkpointing involves saving the state of a data pipeline at specific points during processing, allowing it to resume from the last successful point after a failure rather than starting from scratch.</p>
+
+                <h3>Implementation Approaches</h3>
+                <ul>
+                    <li><strong>Watermarking:</strong> Track the highest timestamp or sequence number processed</li>
+                    <li><strong>State Storage:</strong> Use a persistent store like S3, HDFS, or a database to save checkpoint state</li>
+                    <li><strong>Frequency:</strong> Balance checkpoint frequency against performance impact</li>
+                </ul>
+
+                <div class="code-example">
+                    <pre><code># Apache Spark structured streaming example
+query = df.writeStream \
+    .format("parquet") \
+    .option("path", "s3://data/output") \
+    .option("checkpointLocation", "s3://checkpoints/job1") \
+    .start()</code></pre>
+                </div>
+            </section>
+
+            <section id="retry">
+                <h2>Retry and Backoff Pattern</h2>
+                <p>The retry pattern involves automatically attempting a failed operation again, while backoff strategies gradually increase the time between retry attempts to avoid overwhelming struggling systems.</p>
+
+                <h3>Common Backoff Strategies</h3>
+                <ul>
+                    <li><strong>Constant Backoff:</strong> Wait a fixed time between retries</li>
+                    <li><strong>Linear Backoff:</strong> Increase wait time linearly with each retry</li>
+                    <li><strong>Exponential Backoff:</strong> Double the wait time with each retry</li>
+                    <li><strong>Exponential Backoff with Jitter:</strong> Add randomness to avoid thundering herd problem</li>
+                </ul>
+
+                <div class="code-example">
+                    <pre><code>import backoff
+import requests
+
+@backoff.on_exception(
+    backoff.expo,
+    requests.exceptions.RequestException,
+    max_tries=5,
+    jitter=backoff.full_jitter
+)
+def call_external_api(url, payload):
+    """Make API call with exponential backoff retry"""
+    response = requests.post(url, json=payload)
+    response.raise_for_status()
+    return response.json()</code></pre>
+                </div>
+            </section>
+
+            <section id="transactional-outbox">
+                <h2>Transactional Outbox Pattern</h2>
+                <p>The transactional outbox pattern ensures reliable message publishing in distributed systems by temporarily storing outgoing messages in a database table within the same transaction as the business operation.</p>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Business operation and message creation occur in the same database transaction</li>
+                    <li>A separate process polls the outbox table for unprocessed messages</li>
+                    <li>Messages are published to the message broker</li>
+                    <li>After successful publishing, messages are marked as processed</li>
+                </ol>
+
+                <div class="warning">
+                    <strong>Warning:</strong> Without the outbox pattern, direct publishing to a message broker from within a database transaction can lead to inconsistencies if the transaction succeeds but the message publish fails, or vice versa.
+                </div>
+
+                <div class="code-example">
+                    <pre><code>-- SQL example of outbox pattern
+
+-- 1. Create outbox table
+CREATE TABLE outbox_messages (
+  id UUID PRIMARY KEY,
+  aggregate_type VARCHAR(255) NOT NULL,
+  aggregate_id VARCHAR(255) NOT NULL,
+  event_type VARCHAR(255) NOT NULL,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  processed BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+-- 2. Business transaction with outbox insert
+BEGIN;
+  -- Update business entity
+  UPDATE customers SET status = 'ACTIVE' WHERE id = 'cust-123';
+  
+  -- Insert into outbox in same transaction
+  INSERT INTO outbox_messages (
+    id, aggregate_type, aggregate_id, event_type, payload
+  ) VALUES (
+    'msg-456', 'customer', 'cust-123', 'CustomerActivated',
+    '{"customerId": "cust-123", "activatedAt": "2023-06-05T14:30:00Z"}'
+  );
+COMMIT;</code></pre>
+                </div>
+            </section>
+
+            <section id="implementation-example">
+                <h2>Implementation Example: Reliable Data Pipeline Architecture</h2>
+                <p>Let's examine a practical example that combines several of these patterns into a resilient data pipeline architecture.</p>
+
+                <div class="diagram">
+                    <svg viewBox="0 0 800 400" width="100%" height="auto">
+                        <rect x="50" y="50" width="700" height="300" rx="10" ry="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                        
+                        <!-- Data Source -->
+                        <rect x="100" y="100" width="120" height="60" rx="5" ry="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+                        <text x="160" y="135" font-size="14" text-anchor="middle" fill="#1e40af">Source Systems</text>
+                        
+                        <!-- Change Data Capture -->
+                        <rect x="100" y="240" width="120" height="60" rx="5" ry="5" fill="#e0e7ff" stroke="#a5b4fc" stroke-width="2"/>
+                        <text x="160" y="270" font-size="14" text-anchor="middle" fill="#3730a3">CDC / Logs</text>
+                        
+                        <!-- Message Queue -->
+                        <rect x="280" y="170" width="120" height="60" rx="5" ry="5" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+                        <text x="340" y="190" font-size="14" text-anchor="middle" fill="#5b21b6">Message Queue</text>
+                        <text x="340" y="210" font-size="10" text-anchor="middle" fill="#5b21b6">With DLQ</text>
+                        
+                        <!-- Processing Service -->
+                        <rect x="460" y="170" width="120" height="60" rx="5" ry="5" fill="#fae8ff" stroke="#e9d5ff" stroke-width="2"/>
+                        <text x="520" y="190" font-size="14" text-anchor="middle" fill="#701a75">Idempotent</text>
+                        <text x="520" y="210" font-size="14" text-anchor="middle" fill="#701a75">Processor</text>
+                        
+                        <!-- Data Store -->
+                        <rect x="640" y="170" width="120" height="60" rx="5" ry="5" fill="#fce7f3" stroke="#fbcfe8" stroke-width="2"/>
+                        <text x="700" y="205" font-size="14" text-anchor="middle" fill="#9d174d">Data Sink</text>
+                        
+                        <!-- Circuit Breaker -->
+                        <rect x="460" y="100" width="120" height="30" rx="5" ry="5" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+                        <text x="520" y="120" font-size="12" text-anchor="middle" fill="#92400e">Circuit Breaker</text>
+                        
+                        <!-- Retry with Backoff -->
+                        <rect x="460" y="270" width="120" height="30" rx="5" ry="5" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+                        <text x="520" y="290" font-size="12" text-anchor="middle" fill="#92400e">Retry with Backoff</text>
+                        
+                        <!-- Checkpoint Store -->
+                        <rect x="460" y="320" width="120" height="30" rx="5" ry="5" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+                        <text x="520" y="340" font-size="12" text-anchor="middle" fill="#92400e">Checkpoint Store</text>
+                        
+                        <!-- Connect arrows -->
+                        <line x1="160" y1="160" x2="160" y2="240" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="220" y1="270" x2="280" y2="210" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="220" y1="130" x2="280" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="400" y1="200" x2="460" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="580" y1="200" x2="640" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="520" y1="170" x2="520" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="520" y1="230" x2="520" y2="270" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="520" y1="300" x2="520" y2="320" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Arrow marker definition -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                    <div class="diagram-caption">Reliable Data Pipeline Architecture</div>
+                </div>
+
+                <p>This architecture includes:</p>
+                <ul>
+                    <li>Change data capture to extract data from source systems without impact</li>
+                    <li>Message queue with dead letter queue for reliable message delivery</li>
+                    <li>Idempotent processors that can safely handle retries</li>
+                    <li>Circuit breakers to prevent cascade failures</li>
+                    <li>Retry with backoff for handling transient failures</li>
+                    <li>Checkpointing to recover from failures efficiently</li>
+                </ul>
+            </section>
+
+            <section id="conclusion">
+                <h2>Conclusion</h2>
+                <p>Building reliable data pipelines requires deliberate application of these design patterns. While implementing these patterns requires additional up-front engineering effort, they pay dividends through reduced operational incidents, improved data quality, and increased trust in data systems.</p>
+                
+                <p>Remember that reliability is a journey, not a destination. Start by identifying the most critical failure modes in your current pipelines and incrementally apply these patterns to address them. Over time, you'll build a robust data infrastructure that can handle the inevitable failures that occur in distributed systems.</p>
+
+                <div class="note">
+                    <strong>Final Tip:</strong> Document not just what your pipelines do, but how they handle failures. This documentation is invaluable during incident response and for onboarding new team members.
+                </div>
+            </section>
+
+            <div class="related-articles">
+                <h3>Related Articles</h3>
+                <div class="related-articles-grid">
+                    <a href="data-quality-contracts.html" class="related-article">
+                        <span class="title">Data Quality Frameworks and Data Contracts</span>
+                        <span class="author">By Jennifer Reynolds</span>
+                    </a>
+                    <a href="data-lakehouse-implementation.html" class="related-article">
+                        <span class="title">Data Lakehouse Implementation Guide</span>
+                        <span class="author">By Sarah Davis</span>
+                    </a>
+                    <a href="index.html" class="related-article">
+                        <span class="title">View All Data Engineering Articles</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <aside class="article-sidebar">
+            <div class="author-card">
+                <div class="author-image">
+                    <img src="../../images/authors/michael-chen.jpg" alt="Michael Chen" onerror="this.src='../../images/authors/default-avatar.jpg'">
+                </div>
+                <div class="author-info">
+                    <h3>Michael Chen</h3>
+                    <p>Principal Data Engineer with 15+ years of experience building large-scale data systems. Specializes in distributed systems and data reliability engineering.</p>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Join the Discussion</h3>
+                <p>Have questions or insights about data pipeline reliability? Share your thoughts in the comments below.</p>
+                <button class="btn secondary">View Comments (8)</button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to receive notifications about new data engineering articles and updates.</p>
+                <form class="sidebar-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn primary">Subscribe</button>
+                </form>
+            </div>
+        </aside>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest data engineering practices and insights delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="../data-engineering.html">Data Engineering</a></li>
+                        <li><a href="../mlops.html">MLOps</a></li>
+                        <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

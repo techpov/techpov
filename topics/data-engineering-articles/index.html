@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive collection of articles on data engineering, data pipelines, ETL processes, and modern data stack for technical practitioners">
+    <title>Data Engineering Articles - TechPOV</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/topics.css">
+    <link rel="icon" href="../../favicon.ico">
+    <style>
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .article-category {
+            margin-top: 3rem;
+        }
+        
+        .article-category h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+        
+        .category-desc {
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .article-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .article-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .article-item h3 {
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+        
+        .article-item p {
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+            flex-grow: 1;
+        }
+        
+        .article-meta {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tags {
+            margin-bottom: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="../data-engineering.html" class="active">Data Engineering</a></li>
+                    <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="../mlops.html">MLOps</a></li>
+                    <li><a href="../data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Data Engineering Articles</h1>
+            <p class="lead">In-depth guides and best practices for building robust, scalable data infrastructure</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <a href="../data-engineering.html" class="back-link">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+            </svg>
+            Back to Data Engineering Overview
+        </a>
+        
+        <section class="article-category">
+            <h2>Modern Data Stack</h2>
+            <p class="category-desc">Exploring the components and architecture of modern data stacks for scalable, future-proof data platforms.</p>
+            
+            <div class="article-grid">
+                <a href="modern-data-stack-comparison.html" class="article-item">
+                    <h3>Modern Data Stack: Comparative Analysis of Architecture Approaches</h3>
+                    <div class="article-meta">
+                        <span class="author">By Lisa Chen</span>
+                        <span class="date">June 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Architecture</span>
+                        <span class="tag">Data Lake</span>
+                        <span class="tag">Data Warehouse</span>
+                    </div>
+                    <p>A practical comparison of different data stack architectures including data lake, data warehouse, lakehouse, and mesh approaches - with decision frameworks for choosing the right architecture.</p>
+                </a>
+                
+                <a href="data-lakehouse-implementation.html" class="article-item">
+                    <h3>Implementing a Data Lakehouse: Architecture and Best Practices</h3>
+                    <div class="article-meta">
+                        <span class="author">By Alex Rodriguez</span>
+                        <span class="date">May 28, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Lakehouse</span>
+                        <span class="tag">Delta Lake</span>
+                        <span class="tag">Implementation</span>
+                    </div>
+                    <p>A comprehensive guide to implementing a data lakehouse architecture, including technology selection, data organization patterns, and access layer design with Delta Lake, Iceberg, or Hudi.</p>
+                </a>
+                
+                <a href="batch-streaming-unification.html" class="article-item">
+                    <h3>Unifying Batch and Stream Processing: Architectural Patterns</h3>
+                    <div class="article-meta">
+                        <span class="author">By Raj Patel</span>
+                        <span class="date">June 2, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Streaming</span>
+                        <span class="tag">Batch Processing</span>
+                        <span class="tag">Lambda Architecture</span>
+                    </div>
+                    <p>Practical approaches to unifying batch and stream processing in modern data platforms, with detailed examples using technologies like Apache Beam, Spark Structured Streaming, and Flink.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Data Pipelines & Orchestration</h2>
+            <p class="category-desc">Designing, building, and maintaining reliable data pipelines with modern orchestration tools.</p>
+            
+            <div class="article-grid">
+                <a href="data-pipeline-patterns.html" class="article-item">
+                    <h3>Essential Data Pipeline Design Patterns for Reliability</h3>
+                    <div class="article-meta">
+                        <span class="author">By Sarah Johnson</span>
+                        <span class="date">May 30, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Pipeline Design</span>
+                        <span class="tag">Reliability</span>
+                        <span class="tag">Design Patterns</span>
+                    </div>
+                    <p>Key design patterns for building resilient data pipelines, including idempotency, checkpointing, circuit breakers, and dead-letter queues with implementation examples in popular frameworks.</p>
+                </a>
+                
+                <a href="airflow-vs-prefect-dagster.html" class="article-item">
+                    <h3>Beyond Airflow: Comparative Analysis of Modern Orchestrators</h3>
+                    <div class="article-meta">
+                        <span class="author">By Michael Wong</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Orchestration</span>
+                        <span class="tag">Airflow</span>
+                        <span class="tag">Prefect</span>
+                        <span class="tag">Dagster</span>
+                    </div>
+                    <p>A detailed comparison of modern data orchestration tools (Airflow, Prefect, Dagster) with architectural analysis, implementation patterns, and guidance on selecting the right tool for your use case.</p>
+                </a>
+                
+                <a href="data-quality-monitoring.html" class="article-item">
+                    <h3>Implementing Data Quality Monitoring in Production Pipelines</h3>
+                    <div class="article-meta">
+                        <span class="author">By Priya Sharma</span>
+                        <span class="date">May 12, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Data Quality</span>
+                        <span class="tag">Monitoring</span>
+                        <span class="tag">Observability</span>
+                    </div>
+                    <p>Practical approaches to implementing automated data quality checks, monitoring, and observability in production data pipelines with tools like Great Expectations, dbt tests, and Monte Carlo.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Data Storage & Processing</h2>
+            <p class="category-desc">Techniques and approaches for efficient data storage, processing, and access patterns.</p>
+            
+            <div class="article-grid">
+                <a href="columnar-storage-optimization.html" class="article-item">
+                    <h3>Columnar Storage Optimization Techniques for Analytics</h3>
+                    <div class="article-meta">
+                        <span class="author">By Daniel Lee</span>
+                        <span class="date">May 20, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Columnar Storage</span>
+                        <span class="tag">Parquet</span>
+                        <span class="tag">Performance</span>
+                    </div>
+                    <p>In-depth techniques for optimizing columnar storage formats like Parquet and ORC, including compression selection, encoding strategies, and partitioning approaches for maximum query performance.</p>
+                </a>
+                
+                <a href="processing-engine-comparison.html" class="article-item">
+                    <h3>Data Processing Engine Selection Guide: Spark vs. Presto vs. Dask</h3>
+                    <div class="article-meta">
+                        <span class="author">By James Wilson</span>
+                        <span class="date">June 10, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Spark</span>
+                        <span class="tag">Presto</span>
+                        <span class="tag">Dask</span>
+                        <span class="tag">Processing Engines</span>
+                    </div>
+                    <p>A practical framework for selecting the right data processing engine based on workload characteristics, data volume, performance requirements, and resource constraints with benchmark results.</p>
+                </a>
+                
+                <a href="time-series-data-architecture.html" class="article-item">
+                    <h3>Time Series Data Architecture: Storage and Processing Patterns</h3>
+                    <div class="article-meta">
+                        <span class="author">By Maria Garcia</span>
+                        <span class="date">May 8, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Time Series</span>
+                        <span class="tag">TimescaleDB</span>
+                        <span class="tag">InfluxDB</span>
+                    </div>
+                    <p>Architectural patterns for efficiently storing, processing, and querying time series data at scale, including database selection, schema design, and downsampling strategies for analytics workloads.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Data Transformation & Modeling</h2>
+            <p class="category-desc">Modern approaches to data transformation, modeling, and the analytics engineering workflow.</p>
+            
+            <div class="article-grid">
+                <a href="dbt-advanced-patterns.html" class="article-item">
+                    <h3>Advanced dbt Patterns for Complex Data Transformations</h3>
+                    <div class="article-meta">
+                        <span class="author">By Chris Taylor</span>
+                        <span class="date">June 18, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">dbt</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Data Modeling</span>
+                    </div>
+                    <p>Advanced techniques for implementing complex data transformations in dbt, including advanced Jinja templating, macro design patterns, testing strategies, and multi-environment deployment approaches.</p>
+                </a>
+                
+                <a href="data-modeling-dimensional-vs-datavault.html" class="article-item">
+                    <h3>Data Modeling in 2023: Dimensional vs. Data Vault vs. One Big Table</h3>
+                    <div class="article-meta">
+                        <span class="author">By Jessica Kim</span>
+                        <span class="date">May 25, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Data Modeling</span>
+                        <span class="tag">Dimensional</span>
+                        <span class="tag">Data Vault</span>
+                    </div>
+                    <p>A comparative analysis of data modeling methodologies for modern data platforms, with guidance on selecting and implementing the right approach based on use cases, team skills, and technical constraints.</p>
+                </a>
+                
+                <a href="incremental-materialization-strategies.html" class="article-item">
+                    <h3>Incremental Materialization Strategies for Efficient Transformations</h3>
+                    <div class="article-meta">
+                        <span class="author">By Omar Hassan</span>
+                        <span class="date">June 8, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Incremental</span>
+                        <span class="tag">Materialization</span>
+                        <span class="tag">Performance</span>
+                    </div>
+                    <p>Techniques for implementing efficient incremental materialization strategies in data transformations, including change detection methods, handling of late-arriving data, and strategies for reprocessing historical data.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Streaming & Real-time Data</h2>
+            <p class="category-desc">Implementation patterns and architectural approaches for streaming and real-time data systems.</p>
+            
+            <div class="article-grid">
+                <a href="kafka-vs-pulsar-comparison.html" class="article-item">
+                    <h3>Kafka vs. Pulsar: Architecture and Performance Comparison</h3>
+                    <div class="article-meta">
+                        <span class="author">By David Chen</span>
+                        <span class="date">May 22, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Kafka</span>
+                        <span class="tag">Pulsar</span>
+                        <span class="tag">Streaming</span>
+                    </div>
+                    <p>A detailed comparison of Kafka and Pulsar architectures, including performance benchmarks, architectural trade-offs, and guidance on selecting the right messaging system for different use cases.</p>
+                </a>
+                
+                <a href="streaming-architecture-patterns.html" class="article-item">
+                    <h3>Streaming Data Architecture Patterns for Real-time Analytics</h3>
+                    <div class="article-meta">
+                        <span class="author">By Sophia Wu</span>
+                        <span class="date">June 12, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Streaming</span>
+                        <span class="tag">Real-time</span>
+                        <span class="tag">Architecture</span>
+                    </div>
+                    <p>Key architectural patterns for implementing real-time analytics with streaming data, including event-driven architectures, real-time aggregation techniques, and integration patterns with downstream systems.</p>
+                </a>
+                
+                <a href="kafka-connect-implementation.html" class="article-item">
+                    <h3>Kafka Connect in Production: Implementation Patterns</h3>
+                    <div class="article-meta">
+                        <span class="author">By Marcus Johnson</span>
+                        <span class="date">May 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Kafka Connect</span>
+                        <span class="tag">CDC</span>
+                        <span class="tag">Integration</span>
+                    </div>
+                    <p>Practical guide to implementing production-grade Kafka Connect deployments, including connector management strategies, error handling patterns, and integration approaches for CDC and real-time data pipelines.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Data Governance & Security</h2>
+            <p class="category-desc">Implementing effective data governance, privacy, and security practices in modern data platforms.</p>
+            
+            <div class="article-grid">
+                <a href="data-mesh-governance.html" class="article-item">
+                    <h3>Data Governance in a Data Mesh: Federated Approaches</h3>
+                    <div class="article-meta">
+                        <span class="author">By Elena Rodriguez</span>
+                        <span class="date">June 20, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Data Mesh</span>
+                        <span class="tag">Governance</span>
+                        <span class="tag">Data Products</span>
+                    </div>
+                    <p>Practical approaches to implementing federated data governance in a data mesh architecture, including data product design principles, data contracts, and domain-oriented ownership models.</p>
+                </a>
+                
+                <a href="data-access-control-patterns.html" class="article-item">
+                    <h3>Fine-Grained Access Control Patterns for Data Platforms</h3>
+                    <div class="article-meta">
+                        <span class="author">By Thomas Wright</span>
+                        <span class="date">May 10, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Access Control</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Row-level Security</span>
+                    </div>
+                    <p>Implementation patterns for fine-grained access control in modern data platforms, including row-level security, column-level access, and dynamic data masking with examples in Snowflake, Databricks, and BigQuery.</p>
+                </a>
+                
+                <a href="data-lineage-implementation.html" class="article-item">
+                    <h3>End-to-End Data Lineage: Implementation Approaches</h3>
+                    <div class="article-meta">
+                        <span class="author">By Nina Patel</span>
+                        <span class="date">June 1, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Data Lineage</span>
+                        <span class="tag">Metadata</span>
+                        <span class="tag">OpenLineage</span>
+                    </div>
+                    <p>Techniques for implementing end-to-end data lineage in complex data ecosystems, including metadata collection strategies, integration of lineage across different tools, and implementing Open Lineage standards.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest data engineering techniques and best practices delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="../data-engineering.html">Data Engineering</a></li>
+                        <li><a href="../mlops.html">MLOps</a></li>
+                        <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

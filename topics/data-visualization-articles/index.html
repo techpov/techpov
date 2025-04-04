@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive collection of articles on data visualization, dashboard design, charting techniques, and visualization tools for technical practitioners">
+    <title>Data Visualization Articles - TechPOV</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/topics.css">
+    <link rel="icon" href="../../favicon.ico">
+    <style>
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .article-category {
+            margin-top: 3rem;
+        }
+        
+        .article-category h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+        
+        .category-desc {
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .article-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .article-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .article-item h3 {
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+        
+        .article-item p {
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+            flex-grow: 1;
+        }
+        
+        .article-meta {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tags {
+            margin-bottom: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="../data-engineering.html">Data Engineering</a></li>
+                    <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="../mlops.html">MLOps</a></li>
+                    <li><a href="../data-visualization.html" class="active">Data Visualization</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Data Visualization Articles</h1>
+            <p class="lead">In-depth guides and best practices for creating effective data visualizations and dashboards</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <a href="../data-visualization.html" class="back-link">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+            </svg>
+            Back to Data Visualization Overview
+        </a>
+        
+        <section class="article-category">
+            <h2>Visualization Design Principles</h2>
+            <p class="category-desc">Theoretical and practical approaches to designing effective data visualizations based on perception, cognition, and communication principles.</p>
+            
+            <div class="article-grid">
+                <a href="visualization-design-framework.html" class="article-item">
+                    <h3>Data Visualization Design Framework for Technical Audiences</h3>
+                    <div class="article-meta">
+                        <span class="author">By Emma Mitchell</span>
+                        <span class="date">June 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Design</span>
+                        <span class="tag">Framework</span>
+                        <span class="tag">Technical</span>
+                    </div>
+                    <p>A comprehensive framework for designing effective data visualizations specifically for technical audiences, including perceptual principles, data-to-visual mapping strategies, and cognitive considerations for complex data.</p>
+                </a>
+                
+                <a href="chart-selection-guide.html" class="article-item">
+                    <h3>Chart Selection Guide: Matching Visualization to Data Types</h3>
+                    <div class="article-meta">
+                        <span class="author">By Alex Rodriguez</span>
+                        <span class="date">May 28, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Chart Selection</span>
+                        <span class="tag">Decision Framework</span>
+                        <span class="tag">Data Types</span>
+                    </div>
+                    <p>A structured decision framework for selecting the most appropriate visualization type based on data characteristics, analytical goals, and audience needs, with extensive examples and implementation guidance.</p>
+                </a>
+                
+                <a href="color-theory-data-viz.html" class="article-item">
+                    <h3>Color Theory in Data Visualization: From Principles to Implementation</h3>
+                    <div class="article-meta">
+                        <span class="author">By Sophia Wu</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Color Theory</span>
+                        <span class="tag">Accessibility</span>
+                        <span class="tag">Perception</span>
+                    </div>
+                    <p>Practical application of color theory principles in data visualization, including creating effective color scales, ensuring accessibility, encoding meaning through color, and implementing color strategies in visualization libraries.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Dashboard Design & Implementation</h2>
+            <p class="category-desc">Strategies and implementation approaches for building effective dashboards and interactive data products.</p>
+            
+            <div class="article-grid">
+                <a href="dashboard-information-architecture.html" class="article-item">
+                    <h3>Dashboard Information Architecture: Organization and Layout Patterns</h3>
+                    <div class="article-meta">
+                        <span class="author">By Lisa Chen</span>
+                        <span class="date">May 20, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Information Architecture</span>
+                        <span class="tag">Layout</span>
+                        <span class="tag">Dashboard Design</span>
+                    </div>
+                    <p>Proven patterns for organizing information in dashboards, including hierarchy development, visualization arrangement, navigation design, and layout strategies optimized for different analytical workflows and user needs.</p>
+                </a>
+                
+                <a href="interactive-visualization.html" class="article-item">
+                    <h3>Interactive Visualization Patterns: Design and Implementation</h3>
+                    <div class="article-meta">
+                        <span class="author">By Michael Wong</span>
+                        <span class="date">June 10, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Interactivity</span>
+                        <span class="tag">UX</span>
+                        <span class="tag">Design Patterns</span>
+                    </div>
+                    <p>Key patterns for designing effective interactive visualizations, including drill-down techniques, coordinated views, dynamic filtering, and state management with implementation examples in modern visualization libraries.</p>
+                </a>
+                
+                <a href="dashboard-performance.html" class="article-item">
+                    <h3>Dashboard Performance Optimization Techniques</h3>
+                    <div class="article-meta">
+                        <span class="author">By Raj Patel</span>
+                        <span class="date">May 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Performance</span>
+                        <span class="tag">Optimization</span>
+                        <span class="tag">Rendering</span>
+                    </div>
+                    <p>Technical approaches to optimizing dashboard performance, including data processing strategies, rendering optimization, asynchronous loading patterns, and caching techniques for high-performance interactive visualizations.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Visualization Libraries & Tools</h2>
+            <p class="category-desc">Technical deep dives into visualization libraries, frameworks, and tools for different use cases and environments.</p>
+            
+            <div class="article-grid">
+                <a href="js-viz-libraries-comparison.html" class="article-item">
+                    <h3>JavaScript Visualization Libraries: Technical Comparison</h3>
+                    <div class="article-meta">
+                        <span class="author">By David Lee</span>
+                        <span class="date">June 12, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Libraries</span>
+                        <span class="tag">D3.js</span>
+                    </div>
+                    <p>An in-depth technical comparison of JavaScript visualization libraries (D3.js, Plotly, Chart.js, Vega-Lite, etc.) with performance benchmarks, feature analysis, and guidance on selecting the right library for different use cases.</p>
+                </a>
+                
+                <a href="python-visualization-ecosystem.html" class="article-item">
+                    <h3>Python Visualization Ecosystem: From Analysis to Production</h3>
+                    <div class="article-meta">
+                        <span class="author">By Sarah Johnson</span>
+                        <span class="date">May 25, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Matplotlib</span>
+                        <span class="tag">Plotly</span>
+                    </div>
+                    <p>A comprehensive guide to the Python visualization ecosystem, including Matplotlib, Seaborn, Plotly, and Altair, with implementation patterns for different workflows from exploratory analysis to production deployments.</p>
+                </a>
+                
+                <a href="tableau-implementation-patterns.html" class="article-item">
+                    <h3>Tableau Implementation Patterns for Enterprise Deployments</h3>
+                    <div class="article-meta">
+                        <span class="author">By Elena Garcia</span>
+                        <span class="date">June 8, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Tableau</span>
+                        <span class="tag">Enterprise</span>
+                        <span class="tag">Integration</span>
+                    </div>
+                    <p>Advanced implementation patterns for enterprise Tableau deployments, including data architecture, server configuration, performance optimization, security implementation, and embedding strategies.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Advanced Visualization Techniques</h2>
+            <p class="category-desc">Specialized and advanced visualization techniques for specific data types, domains, and analytical needs.</p>
+            
+            <div class="article-grid">
+                <a href="network-graph-visualization.html" class="article-item">
+                    <h3>Network Graph Visualization: Techniques and Implementation</h3>
+                    <div class="article-meta">
+                        <span class="author">By Marcus Johnson</span>
+                        <span class="date">June 20, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Network Graphs</span>
+                        <span class="tag">Force-directed</span>
+                        <span class="tag">Graph Analytics</span>
+                    </div>
+                    <p>Comprehensive guide to visualizing network and graph data, including layout algorithms, interactive exploration techniques, and performance optimization for large-scale graphs with implementation examples.</p>
+                </a>
+                
+                <a href="geospatial-visualization.html" class="article-item">
+                    <h3>Geospatial Data Visualization: From Basics to Advanced Techniques</h3>
+                    <div class="article-meta">
+                        <span class="author">By Jessica Kim</span>
+                        <span class="date">May 30, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Geospatial</span>
+                        <span class="tag">Maps</span>
+                        <span class="tag">GIS</span>
+                    </div>
+                    <p>Technical approaches to visualizing geospatial data, including choosing appropriate map projections, implementing choropleth and point maps, handling large datasets, and integrating with modern mapping libraries and services.</p>
+                </a>
+                
+                <a href="time-series-visualization.html" class="article-item">
+                    <h3>Time Series Visualization: Advanced Techniques and Patterns</h3>
+                    <div class="article-meta">
+                        <span class="author">By Thomas Wright</span>
+                        <span class="date">June 2, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Time Series</span>
+                        <span class="tag">Temporal Data</span>
+                        <span class="tag">Multi-scale</span>
+                    </div>
+                    <p>Specialized techniques for visualizing time series data, including multi-scale visualizations, anomaly highlighting, comparison patterns, and handling real-time streaming data with implementations in various visualization libraries.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Data Storytelling</h2>
+            <p class="category-desc">Crafting compelling data narratives and storytelling techniques for effective communication and decision support.</p>
+            
+            <div class="article-grid">
+                <a href="data-storytelling-framework.html" class="article-item">
+                    <h3>Data Storytelling Framework for Technical Audiences</h3>
+                    <div class="article-meta">
+                        <span class="author">By Maria Garcia</span>
+                        <span class="date">May 18, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Storytelling</span>
+                        <span class="tag">Narrative</span>
+                        <span class="tag">Technical</span>
+                    </div>
+                    <p>A structured framework for crafting effective data stories specifically for technical audiences, including narrative structure development, evidence selection, visualization sequencing, and balancing detail with clarity.</p>
+                </a>
+                
+                <a href="narrative-visualization-techniques.html" class="article-item">
+                    <h3>Narrative Visualization Techniques: Implementation Approaches</h3>
+                    <div class="article-meta">
+                        <span class="author">By David Chen</span>
+                        <span class="date">June 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Narrative</span>
+                        <span class="tag">Scrollytelling</span>
+                        <span class="tag">Annotations</span>
+                    </div>
+                    <p>Technical implementation of narrative visualization techniques, including scrollytelling, animated transitions, guided walkthroughs, and annotation strategies with code examples in web-based visualization frameworks.</p>
+                </a>
+                
+                <a href="dashboards-vs-data-stories.html" class="article-item">
+                    <h3>Dashboards vs. Data Stories: Design Approaches for Different Needs</h3>
+                    <div class="article-meta">
+                        <span class="author">By Omar Hassan</span>
+                        <span class="date">May 22, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Dashboards</span>
+                        <span class="tag">Data Stories</span>
+                        <span class="tag">Design</span>
+                    </div>
+                    <p>Comparative analysis of design approaches for dashboards and data stories, with guidance on selecting the right format based on audience needs, analytical complexity, and decision-making context with implementation examples.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Data Visualization in AI & ML</h2>
+            <p class="category-desc">Specialized visualization techniques for machine learning models, AI systems, and complex algorithmic outputs.</p>
+            
+            <div class="article-grid">
+                <a href="model-explainability-visualization.html" class="article-item">
+                    <h3>Visualizing Model Explainability: From SHAP to Feature Importance</h3>
+                    <div class="article-meta">
+                        <span class="author">By Priya Sharma</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Explainability</span>
+                        <span class="tag">SHAP</span>
+                        <span class="tag">Feature Importance</span>
+                    </div>
+                    <p>Technical approaches to visualizing machine learning model explainability, including SHAP values, feature importance, partial dependence plots, and integrated gradients with implementation examples across different visualization libraries.</p>
+                </a>
+                
+                <a href="llm-output-visualization.html" class="article-item">
+                    <h3>LLM Output Visualization Techniques for Analysis and Debugging</h3>
+                    <div class="article-meta">
+                        <span class="author">By James Wilson</span>
+                        <span class="date">May 25, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">LLM</span>
+                        <span class="tag">Visualization</span>
+                        <span class="tag">Attention</span>
+                    </div>
+                    <p>Specialized techniques for visualizing and analyzing large language model outputs, including attention visualization, token probability analysis, embedding space exploration, and comparison tools for prompt engineering.</p>
+                </a>
+                
+                <a href="embedding-space-visualization.html" class="article-item">
+                    <h3>Embedding Space Visualization: Techniques for High-Dimensional Data</h3>
+                    <div class="article-meta">
+                        <span class="author">By Daniel Lee</span>
+                        <span class="date">June 12, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Embeddings</span>
+                        <span class="tag">Dimensionality Reduction</span>
+                        <span class="tag">t-SNE</span>
+                    </div>
+                    <p>Practical approaches to visualizing high-dimensional embedding spaces, including dimensionality reduction techniques (t-SNE, UMAP, PCA), interactive exploration tools, and cluster analysis visualizations with implementation examples.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest data visualization techniques and best practices delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="../data-engineering.html">Data Engineering</a></li>
+                        <li><a href="../mlops.html">MLOps</a></li>
+                        <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

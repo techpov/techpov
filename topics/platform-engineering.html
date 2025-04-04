@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expert insights on platform engineering, developer experience, and building modern infrastructure platforms for technical teams">
+    <title>Platform Engineering - TechPOV</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/topics.css">
+    <link rel="icon" href="../favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="data-engineering.html">Data Engineering</a></li>
+                    <li><a href="platform-engineering.html" class="active">Platform Engineering</a></li>
+                    <li><a href="mlops.html">MLOps</a></li>
+                    <li><a href="data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Platform Engineering</h1>
+            <p class="lead">Strategies for creating developer platforms that accelerate delivery and improve operational stability</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="content-layout">
+            <div class="main-content">
+                <section class="intro-section">
+                    <h2>The Platform Engineering Approach</h2>
+                    <p>Platform engineering has emerged as a discipline focused on building and maintaining self-service internal developer platforms that enable engineering organizations to deliver value faster while reducing cognitive load on developers. By providing paved paths and abstractions over complex infrastructure, platform teams help software developers focus on their core mission: building valuable features for users.</p>
+                    
+                    <div class="architecture-diagram">
+                        <svg viewBox="0 0 800 400" width="100%" height="auto">
+                            <rect x="50" y="50" width="700" height="300" rx="10" ry="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                            
+                            <!-- Developer/User Layer -->
+                            <rect x="100" y="90" width="600" height="50" rx="5" ry="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+                            <text x="400" y="120" font-size="14" text-anchor="middle" fill="#1e40af">Software Engineers / Application Teams</text>
+                            
+                            <!-- Self-Service Portal -->
+                            <rect x="125" y="170" width="550" height="50" rx="5" ry="5" fill="#e0e7ff" stroke="#a5b4fc" stroke-width="2"/>
+                            <text x="400" y="200" font-size="14" text-anchor="middle" fill="#3730a3">Self-Service Developer Portal</text>
+                            
+                            <!-- Platform Capabilities -->
+                            <rect x="100" y="250" width="120" height="50" rx="5" ry="5" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+                            <text x="160" y="280" font-size="14" text-anchor="middle" fill="#5b21b6">CI/CD</text>
+                            
+                            <rect x="235" y="250" width="120" height="50" rx="5" ry="5" fill="#fae8ff" stroke="#e9d5ff" stroke-width="2"/>
+                            <text x="295" y="280" font-size="14" text-anchor="middle" fill="#701a75">Infrastructure</text>
+                            
+                            <rect x="370" y="250" width="120" height="50" rx="5" ry="5" fill="#fce7f3" stroke="#fbcfe8" stroke-width="2"/>
+                            <text x="430" y="280" font-size="14" text-anchor="middle" fill="#9d174d">Observability</text>
+                            
+                            <rect x="505" y="250" width="120" height="50" rx="5" ry="5" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+                            <text x="565" y="280" font-size="14" text-anchor="middle" fill="#92400e">Security</text>
+                            
+                            <!-- Automation and Standards -->
+                            <rect x="100" y="330" width="600" height="25" rx="5" ry="5" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="2"/>
+                            <text x="400" y="347" font-size="12" text-anchor="middle" fill="#065f46">Automation, Golden Paths, Templates, Standards</text>
+                            
+                            <!-- Connect arrows -->
+                            <line x1="400" y1="140" x2="400" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="160" y1="220" x2="160" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="295" y1="220" x2="295" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="430" y1="220" x2="430" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="565" y1="220" x2="565" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="160" y1="300" x2="160" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="295" y1="300" x2="295" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="430" y1="300" x2="430" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="565" y1="300" x2="565" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            
+                            <!-- Arrow marker definition -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                        <div class="diagram-caption">Platform Engineering Architecture Model</div>
+                    </div>
+                </section>
+
+                <section class="articles-section">
+                    <h2>Latest Insights</h2>
+                    
+                    <article class="article-card">
+                        <h3>Golden Paths: Balancing Developer Freedom with Standardization</h3>
+                        <div class="article-meta">
+                            <span class="author">By Thomas Ramirez</span>
+                            <span class="date">June 12, 2023</span>
+                        </div>
+                        <p>How to design effective golden paths that guide developers without restricting innovation. Learn about the key components of a successful golden path implementation and strategies for driving adoption across engineering teams.</p>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Developer Portal Design: UX Principles for Internal Platforms</h3>
+                        <div class="article-meta">
+                            <span class="author">By Amara Wilson</span>
+                            <span class="date">May 21, 2023</span>
+                        </div>
+                        <p>A practical framework for building developer portals with exceptional user experience. This article covers information architecture, usability patterns, and techniques for reducing cognitive load through thoughtful self-service interfaces.</p>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Platform as a Product: Applying Product Management to Internal Tools</h3>
+                        <div class="article-meta">
+                            <span class="author">By Raj Patel</span>
+                            <span class="date">May 3, 2023</span>
+                        </div>
+                        <p>Why treating your developer platform as a product is essential for success. Learn how to implement product management practices like user research, roadmapping, and measuring success through platform adoption metrics and developer satisfaction.</p>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Platform Team Topologies: Organizational Models That Work</h3>
+                        <div class="article-meta">
+                            <span class="author">By Claire Jenkins</span>
+                            <span class="date">April 17, 2023</span>
+                        </div>
+                        <p>Exploring various organizational structures for platform engineering teams and their impact on effectiveness. This article examines successful patterns from stream-aligned teams to platform-as-a-service models and their suitability for different organizational contexts.</p>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+
+                    <div class="article-card">
+                        <h3>Internal Developer Platform Design Principles</h3>
+                        <p>Core principles and design patterns for building effective Internal Developer Platforms that balance abstraction with flexibility.</p>
+                        <div class="article-meta">
+                            <span class="author">By Chen Wei</span>
+                            <span class="date">May 28, 2023</span>
+                        </div>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </div>
+
+                    <div class="article-card">
+                        <h3>Self-service Infrastructure Components</h3>
+                        <p>Architectural approaches for implementing self-service infrastructure that provides a balance between governance and developer autonomy.</p>
+                        <div class="article-meta">
+                            <span class="author">By Rachel Patel</span>
+                            <span class="date">May 15, 2023</span>
+                        </div>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </div>
+
+                    <div class="article-card">
+                        <h3>Platform Observability Design</h3>
+                        <p>Building comprehensive observability into engineering platforms, with approaches for metrics, logging, and tracing that work at scale.</p>
+                        <div class="article-meta">
+                            <span class="author">By Michael Garcia</span>
+                            <span class="date">April 30, 2023</span>
+                        </div>
+                        <a href="platform-engineering-articles/index.html" class="read-more">Read Article</a>
+                    </div>
+
+                    <div class="article-card">
+                        <h3>API Gateway Patterns for Platform Teams</h3>
+                        <p>Implementation patterns for API gateways in platform engineering, including routing, auth, rate limiting, and transformation.</p>
+                        <div class="article-meta">
+                            <span class="author">By Samantha Lee</span>
+                            <span class="date">April 15, 2023</span>
+                        </div>
+                        <a href="platform-engineering-articles/index.html" class="read-more">View All Articles</a>
+                    </div>
+                </section>
+
+                <section class="best-practices">
+                    <h2>Best Practices</h2>
+                    <div class="practices-grid">
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,5A3.5,3.5 0 0,0 8.5,8.5A3.5,3.5 0 0,0 12,12A3.5,3.5 0 0,0 15.5,8.5A3.5,3.5 0 0,0 12,5M12,7A1.5,1.5 0 0,1 13.5,8.5A1.5,1.5 0 0,1 12,10A1.5,1.5 0 0,1 10.5,8.5A1.5,1.5 0 0,1 12,7M5.5,8A2.5,2.5 0 0,0 3,10.5C3,11.44 3.53,12.25 4.29,12.68C4.65,12.88 5.06,13 5.5,13C5.94,13 6.35,12.88 6.71,12.68C7.08,12.47 7.39,12.17 7.62,11.81C6.89,10.86 6.5,9.7 6.5,8.5C6.5,8.41 6.5,8.31 6.5,8.22C6.2,8.08 5.86,8 5.5,8M18.5,8C18.14,8 17.8,8.08 17.5,8.22C17.5,8.31 17.5,8.41 17.5,8.5C17.5,9.7 17.11,10.86 16.38,11.81C16.5,12 16.63,12.15 16.78,12.3C16.94,12.45 17.1,12.58 17.29,12.68C17.65,12.88 18.06,13 18.5,13C18.94,13 19.35,12.88 19.71,12.68C20.47,12.25 21,11.44 21,10.5A2.5,2.5 0 0,0 18.5,8M12,14C9.66,14 5,15.17 5,17.5V19H19V17.5C19,15.17 14.34,14 12,14M4.71,14.55C2.78,14.78 0,15.76 0,17.5V19H3V17.07C3,16.06 3.69,15.22 4.71,14.55M19.29,14.55C20.31,15.22 21,16.06 21,17.07V19H24V17.5C24,15.76 21.22,14.78 19.29,14.55Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Organize Around Capabilities</h4>
+                            <p>Structure platform teams around capabilities (CI/CD, security, observability) rather than projects to build deep expertise and ensure consistent service delivery.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M21.7,13.35L20.7,14.35L18.65,12.3L19.65,11.3C19.86,11.09 20.21,11.09 20.42,11.3L21.7,12.58C21.91,12.79 21.91,13.14 21.7,13.35M12,18.94L18.06,12.88L20.11,14.93L14.06,21H12V18.94M12,14C7.58,14 4,15.79 4,18V20H10V18.11L14,14.11C13.34,14.03 12.67,14 12,14M12,4A4,4 0 0,0 8,8A4,4 0 0,0 12,12A4,4 0 0,0 16,8A4,4 0 0,0 12,4Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Design for Self-Service</h4>
+                            <p>Create intuitive, well-documented interfaces that allow developers to provision resources and capabilities without platform team involvement.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,16L19.36,10.27L21,9L12,2L3,9L4.63,10.27M12,18.54L4.62,12.81L3,14.07L12,21.07L21,14.07L19.37,12.8L12,18.54Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Create Golden Paths</h4>
+                            <p>Develop pre-approved, well-supported paths for common engineering workflows that make following best practices the default.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Foster Communities of Practice</h4>
+                            <p>Build communities around platform capabilities to facilitate knowledge sharing, gather feedback, and drive adoption of platform services.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Measure Platform Effectiveness</h4>
+                            <p>Implement metrics that track platform adoption, developer satisfaction, and improvements in delivery velocity and operational stability.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.1 14.8,9.5V11C15.4,11 16,11.6 16,12.3V15.8C16,16.4 15.4,17 14.7,17H9.2C8.6,17 8,16.4 8,15.7V12.2C8,11.6 8.6,11 9.2,11V9.5C9.2,8.1 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Embed Security Throughout</h4>
+                            <p>Integrate security scanning, policy enforcement, and compliance controls into platform capabilities from the beginning.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <aside class="sidebar">
+                <div class="sidebar-section toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#intro-section">The Platform Engineering Approach</a></li>
+                        <li><a href="#articles-section">Latest Insights</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section popular">
+                    <h3>Popular Articles</h3>
+                    <ul>
+                        <li>
+                            <a href="platform-engineering-articles/index.html">
+                                <span class="title">From DevOps to Platform Engineering</span>
+                                <span class="views">6.1K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="platform-engineering-articles/index.html">
+                                <span class="title">Internal Developer Platforms: Build vs Buy</span>
+                                <span class="views">5.3K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="platform-engineering-articles/index.html">
+                                <span class="title">Kubernetes as a Platform Foundation</span>
+                                <span class="views">4.2K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="platform-engineering-articles/index.html">
+                                <span class="title">Platform Team KPIs That Matter</span>
+                                <span class="views">3.8K views</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section resources">
+                    <h3>Key Technologies</h3>
+                    <ul>
+                        <li><a href="platform-engineering-articles/index.html">Kubernetes</a></li>
+                        <li><a href="platform-engineering-articles/index.html">Backstage</a></li>
+                        <li><a href="platform-engineering-articles/index.html">Terraform</a></li>
+                        <li><a href="platform-engineering-articles/index.html">ArgoCD</a></li>
+                        <li><a href="platform-engineering-articles/index.html">Crossplane</a></li>
+                        <li><a href="platform-engineering-articles/index.html">Service Meshes</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest platform engineering practices and insights delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../contribute.html">Contribute</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="data-engineering.html">Data Engineering</a></li>
+                        <li><a href="mlops.html">MLOps</a></li>
+                        <li><a href="platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/techpov" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/techpov" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/company/techpov" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

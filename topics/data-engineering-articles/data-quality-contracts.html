@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Essential frameworks and implementation strategies for data quality management and data contracts in modern data systems">
+    <title>Data Quality Frameworks and Contracts - TechPOV</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/articles.css">
+    <link rel="icon" href="../../favicon.ico">
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .article-meta {
+            margin-bottom: 2rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        .author-date {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .toc {
+            background-color: var(--gray-100);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ol {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .note {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        code {
+            background-color: var(--gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: var(--gray-800);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        
+        .article-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+        
+        .diagram {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .related-articles {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .related-articles h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .related-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .related-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .related-item h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-item p {
+            color: var(--gray-600);
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="../data-engineering.html" class="active">Data Engineering</a></li>
+                    <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="../mlops.html">MLOps</a></li>
+                    <li><a href="../data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="article-container">
+                <a href="index.html" class="back-link">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+                    </svg>
+                    Back to Data Engineering Articles
+                </a>
+                
+                <article>
+                    <h1>Data Quality Frameworks and Data Contracts: Engineering Trust into Data Systems</h1>
+                    
+                    <div class="article-meta">
+                        <div class="author-date">
+                            <span>By Jennifer Reynolds</span>
+                            <span>June 18, 2023</span>
+                            <span>14 min read</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">Data Quality</span>
+                            <span class="tag">Data Contracts</span>
+                            <span class="tag">Data Governance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="toc">
+                        <h3>Table of Contents</h3>
+                        <ol>
+                            <li><a href="#introduction">Introduction</a></li>
+                            <li><a href="#value-analysis">The Business Value of Data Quality</a></li>
+                            <li><a href="#quality-dimensions">Essential Data Quality Dimensions</a></li>
+                            <li><a href="#data-contracts">Data Contracts: Definition and Implementation</a></li>
+                            <li><a href="#implementation">Implementing a Data Quality Framework</a></li>
+                            <li><a href="#testing-patterns">Data Quality Testing Patterns</a></li>
+                            <li><a href="#tooling">Data Quality Tooling Landscape</a></li>
+                            <li><a href="#conclusion">Conclusion</a></li>
+                        </ol>
+                    </div>
+                    
+                    <section id="introduction">
+                        <h2>Introduction</h2>
+                        <p>As data volumes grow and organizations increasingly rely on data for critical decision-making, the quality of that data has become a paramount concern. Poor data quality costs businesses an estimated 15-25% of their revenue, while undermining trust in analytics and machine learning systems.</p>
+                        
+                        <p>This article explores comprehensive approaches to engineering trust into data systems through structured data quality frameworks and data contracts. We'll focus on practical implementation strategies rather than theoretical concepts alone.</p>
+                        
+                        <div class="note">
+                            <strong>Key Point:</strong> Data quality is not a one-time effort but an ongoing engineering discipline that requires both technical implementation and organizational alignment.
+                        </div>
+                    </section>
+                    
+                    <section id="value-analysis">
+                        <h2>The Business Value of Data Quality</h2>
+                        <p>Before diving into implementation details, it's critical to understand why data quality deserves significant engineering investment:</p>
+                        
+                        <h3>Quantifiable Business Impact</h3>
+                        <p>A critical analysis of data quality initiatives reveals several sources of value:</p>
+                        <ul>
+                            <li><strong>Reduced operational costs:</strong> Addressing data quality issues reactively costs 10x more than preventative measures</li>
+                            <li><strong>Improved decision quality:</strong> Decision makers with high-quality data show 20-30% better outcomes than those working with questionable data</li>
+                            <li><strong>ML model performance:</strong> Data quality issues account for approximately 60% of ML project failures in production environments</li>
+                            <li><strong>Regulatory compliance:</strong> Data quality failures contribute to ~35% of regulatory penalties in highly regulated industries</li>
+                        </ul>
+                        
+                        <h3>The Engineering Value Proposition</h3>
+                        <p>From an engineering perspective, investing in data quality provides compound returns:</p>
+                        <ul>
+                            <li>Reduces debugging time and incident response costs</li>
+                            <li>Increases reusability of data across multiple use cases</li>
+                            <li>Enables self-service analytics with greater confidence</li>
+                            <li>Decreases integration costs between systems</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="quality-dimensions">
+                        <h2>Essential Data Quality Dimensions</h2>
+                        <p>Data quality is multidimensional and needs to be evaluated across several aspects:</p>
+                        
+                        <div class="diagram">
+                            <svg width="100%" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Background -->
+                                <rect x="0" y="0" width="800" height="400" fill="#f8f9fa" rx="10" ry="10"/>
+                                
+                                <!-- Center Circle -->
+                                <circle cx="400" cy="200" r="80" fill="#4361ee" opacity="0.8"/>
+                                <text x="400" y="195" text-anchor="middle" fill="white" font-weight="bold">Data</text>
+                                <text x="400" y="215" text-anchor="middle" fill="white" font-weight="bold">Quality</text>
+                                
+                                <!-- Surrounding Dimensions -->
+                                <g>
+                                    <!-- Accuracy -->
+                                    <circle cx="250" cy="100" r="60" fill="#3a0ca3" opacity="0.8"/>
+                                    <text x="250" y="105" text-anchor="middle" fill="white" font-weight="bold">Accuracy</text>
+                                    <line x1="300" y1="130" x2="350" y2="160" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- Completeness -->
+                                    <circle cx="550" cy="100" r="60" fill="#4cc9f0" opacity="0.8"/>
+                                    <text x="550" y="105" text-anchor="middle" fill="white" font-weight="bold">Completeness</text>
+                                    <line x1="500" y1="130" x2="450" y2="160" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- Consistency -->
+                                    <circle cx="150" cy="200" r="60" fill="#f72585" opacity="0.8"/>
+                                    <text x="150" y="205" text-anchor="middle" fill="white" font-weight="bold">Consistency</text>
+                                    <line x1="210" y1="200" x2="320" y2="200" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- Timeliness -->
+                                    <circle cx="650" cy="200" r="60" fill="#7209b7" opacity="0.8"/>
+                                    <text x="650" y="205" text-anchor="middle" fill="white" font-weight="bold">Timeliness</text>
+                                    <line x1="590" y1="200" x2="480" y2="200" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- Validity -->
+                                    <circle cx="250" cy="300" r="60" fill="#560bad" opacity="0.8"/>
+                                    <text x="250" y="305" text-anchor="middle" fill="white" font-weight="bold">Validity</text>
+                                    <line x1="300" y1="270" x2="350" y2="240" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- Uniqueness -->
+                                    <circle cx="550" cy="300" r="60" fill="#480ca8" opacity="0.8"/>
+                                    <text x="550" y="305" text-anchor="middle" fill="white" font-weight="bold">Uniqueness</text>
+                                    <line x1="500" y1="270" x2="450" y2="240" stroke="#333" stroke-width="2"/>
+                                </g>
+                            </svg>
+                        </div>
+                        
+                        <h3>Implementation Focus for Each Dimension</h3>
+                        <ul>
+                            <li><strong>Accuracy:</strong> The degree to which data correctly represents the real-world entity or event</li>
+                            <li><strong>Completeness:</strong> Whether all required data is present</li>
+                            <li><strong>Consistency:</strong> The absence of contradictions within data across systems</li>
+                            <li><strong>Timeliness:</strong> Whether data is available when needed for business processes</li>
+                            <li><strong>Validity:</strong> Data conforms to defined syntax and domain rules</li>
+                            <li><strong>Uniqueness:</strong> Entities are represented without unintended duplication</li>
+                        </ul>
+                        
+                        <div class="warning">
+                            <strong>Common Pitfall:</strong> Many organizations focus exclusively on validity and completeness checks, ignoring more complex dimensions like accuracy and consistency that often cause more severe business impact.
+                        </div>
+                    </section>
+                    
+                    <section id="data-contracts">
+                        <h2>Data Contracts: Definition and Implementation</h2>
+                        <p>Data contracts represent a formal agreement between data producers and consumers that define expectations for data exchange. They're a cornerstone of modern data quality frameworks.</p>
+                        
+                        <h3>Core Components of a Data Contract</h3>
+                        <ul>
+                            <li><strong>Schema definition:</strong> Field names, types, and structures</li>
+                            <li><strong>Quality requirements:</strong> Expectations across quality dimensions</li>
+                            <li><strong>Service level objectives:</strong> Timeliness, availability, and volume expectations</li>
+                            <li><strong>Access patterns:</strong> How data will be queried and consumed</li>
+                            <li><strong>Lineage and ownership:</strong> Responsible parties and upstream dependencies</li>
+                        </ul>
+                        
+                        <h3>Implementation Approaches</h3>
+                        <p>Data contracts can be implemented with varying degrees of formality and automation:</p>
+                        
+                        <pre><code class="language-python"># Example: Schema contract using Python with Pydantic
+from pydantic import BaseModel, Field, validator
+from typing import List, Optional
+from datetime import datetime
+
+class CustomerData(BaseModel):
+    customer_id: str = Field(..., min_length=10, max_length=20)
+    email: str
+    purchase_date: datetime
+    total_amount: float = Field(..., gt=0)
+    items: List[str]
+    loyalty_tier: Optional[str] = None
+    
+    @validator('email')
+    def email_must_be_valid(cls, v):
+        if '@' not in v:
+            raise ValueError('invalid email format')
+        return v.lower()
+        
+    class Config:
+        schema_extra = {
+            "slo": {
+                "freshness": "1 day",
+                "availability": "99.9%"
+            },
+            "owner": "customer_data_team@example.com"
+        }</code></pre>
+                        
+                        <p>In data warehouse or lake environments, contracts can be implemented using:</p>
+                        <ul>
+                            <li><strong>Schema registries:</strong> Such as those in Confluent Schema Registry or AWS Glue</li>
+                            <li><strong>Data catalogs:</strong> Like Datahub or Amundsen with metadata annotations</li>
+                            <li><strong>dbt tests:</strong> For SQL-based validation in transformation pipelines</li>
+                            <li><strong>Great Expectations:</strong> For defining and validating expectations</li>
+                        </ul>
+                        
+                        <h3>The Value of Contract-Driven Data</h3>
+                        <p>Data contracts shift quality responsibility upstream to producers, creating several benefits:</p>
+                        <ul>
+                            <li>Failures are caught early before propagating through downstream systems</li>
+                            <li>Clear accountability for data quality issues</li>
+                            <li>Enables versioning and managed evolution of data structures</li>
+                            <li>Provides documentation that stays in sync with the actual data</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="implementation">
+                        <h2>Implementing a Data Quality Framework</h2>
+                        <p>A comprehensive data quality framework integrates tools, processes, and organizational structures:</p>
+                        
+                        <h3>Architectural Components</h3>
+                        <ul>
+                            <li><strong>Data profiling layer:</strong> Automated analysis of data characteristics</li>
+                            <li><strong>Quality rules engine:</strong> Specification and execution of validation rules</li>
+                            <li><strong>Monitoring system:</strong> Continuous observation of quality metrics</li>
+                            <li><strong>Alerting mechanisms:</strong> Notification when quality thresholds are breached</li>
+                            <li><strong>Remediation workflows:</strong> Processes for addressing quality issues</li>
+                            <li><strong>Governance integration:</strong> Connection to broader data governance</li>
+                        </ul>
+                        
+                        <h3>Implementation Stages</h3>
+                        <p>Effective data quality frameworks are typically implemented in stages:</p>
+                        
+                        <ol>
+                            <li><strong>Assessment:</strong> Profile current data to identify quality issues and baseline metrics</li>
+                            <li><strong>Definition:</strong> Establish quality dimensions and metrics relevant to your domain</li>
+                            <li><strong>Prevention:</strong> Implement data contracts and validation at ingestion points</li>
+                            <li><strong>Monitoring:</strong> Deploy continuous quality measurement across pipelines</li>
+                            <li><strong>Remediation:</strong> Develop processes for addressing quality issues</li>
+                            <li><strong>Governance:</strong> Connect quality metrics to business impact and responsibilities</li>
+                        </ol>
+                        
+                        <div class="note">
+                            <strong>Implementation Tip:</strong> Start with the most critical datasets based on business impact, then expand coverage. This creates quick wins and builds momentum.
+                        </div>
+                    </section>
+                    
+                    <section id="testing-patterns">
+                        <h2>Data Quality Testing Patterns</h2>
+                        <p>Implementing data quality checks requires different testing patterns depending on the context:</p>
+                        
+                        <h3>Unit Testing for Data</h3>
+                        <p>Applied at the individual record or small batch level:</p>
+                        <ul>
+                            <li>Schema validation</li>
+                            <li>Range and constraint checks</li>
+                            <li>Format validation</li>
+                            <li>Null checks</li>
+                        </ul>
+                        
+                        <h3>Integration Testing for Data Flows</h3>
+                        <p>Applied when data moves between systems:</p>
+                        <ul>
+                            <li>Field-level transformations</li>
+                            <li>Referential integrity</li>
+                            <li>Cross-system consistency</li>
+                            <li>Reconciliation totals</li>
+                        </ul>
+                        
+                        <h3>Statistical Testing for Datasets</h3>
+                        <p>Applied to detect anomalies in larger datasets:</p>
+                        <ul>
+                            <li>Distribution analysis</li>
+                            <li>Outlier detection</li>
+                            <li>Drift monitoring</li>
+                            <li>Correlation analysis</li>
+                        </ul>
+                        
+                        <pre><code class="language-sql">-- Example: dbt test for statistical validation
+SELECT
+  event_date,
+  COUNT(*) as record_count,
+  AVG(transaction_amount) as avg_amount
+FROM {{ ref('transactions') }}
+GROUP BY event_date
+HAVING 
+  -- Volume anomaly detection
+  (record_count < (SELECT AVG(daily_count) * 0.7 
+                  FROM daily_transaction_stats))
+  OR
+  -- Value anomaly detection
+  (avg_amount > (SELECT AVG(daily_avg) * 1.5 
+                FROM daily_transaction_stats))</code></pre>
+                    </section>
+                    
+                    <section id="tooling">
+                        <h2>Data Quality Tooling Landscape</h2>
+                        <p>The tooling ecosystem for data quality is diverse, with options across various deployment models:</p>
+                        
+                        <h3>Open Source Options</h3>
+                        <ul>
+                            <li><strong>Great Expectations:</strong> Python-based data validation framework</li>
+                            <li><strong>dbt Tests:</strong> SQL-based testing within transformation pipelines</li>
+                            <li><strong>Apache Griffin:</strong> Big data quality solution on Hadoop/Spark</li>
+                            <li><strong>Deequ:</strong> Library for data quality checks on large datasets</li>
+                        </ul>
+                        
+                        <h3>Commercial Solutions</h3>
+                        <ul>
+                            <li><strong>Monte Carlo:</strong> End-to-end data observability platform</li>
+                            <li><strong>Collibra DQ:</strong> Enterprise data quality integrated with governance</li>
+                            <li><strong>Informatica DQ:</strong> Comprehensive data quality platform</li>
+                            <li><strong>Talend:</strong> Data quality integrated into broader data integration</li>
+                        </ul>
+                        
+                        <h3>Build vs. Buy Decision Framework</h3>
+                        <p>When evaluating tools, consider these factors:</p>
+                        <ul>
+                            <li><strong>Scale:</strong> Data volume and processing requirements</li>
+                            <li><strong>Integration:</strong> Connection with existing data stack</li>
+                            <li><strong>Flexibility:</strong> Ability to implement custom quality rules</li>
+                            <li><strong>Governance:</strong> Integration with broader governance processes</li>
+                            <li><strong>Cost model:</strong> Licensing structure and operational costs</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="conclusion">
+                        <h2>Conclusion</h2>
+                        <p>Data quality and data contracts are no longer optional components of data engineering—they're essential foundation elements that enable reliable analytics, trustworthy ML models, and confident business decisions.</p>
+                        
+                        <p>The shift to treating data quality as an engineering discipline rather than a compliance activity represents a critical evolution in modern data practices. By implementing structured quality frameworks and formal data contracts, organizations can move from reactive firefighting to proactive quality management.</p>
+                        
+                        <p>As data systems grow more complex and interconnected, engineers who master data quality implementation will deliver exponentially more value to their organizations through reliable, trustworthy data products that enable confident decision-making.</p>
+                    </section>
+                </article>
+                
+                <div class="related-articles">
+                    <h3>Related Articles</h3>
+                    <div class="related-list">
+                        <a href="data-pipeline-patterns.html" class="related-item">
+                            <h4>Data Pipeline Design Patterns for Reliability</h4>
+                            <p>Essential design patterns for building resilient data pipelines that can gracefully handle failures, scale with growing data volumes, and adapt to changing requirements.</p>
+                        </a>
+                        <a href="data-lakehouse-implementation.html" class="related-item">
+                            <h4>Data Lakehouse Implementation Guide</h4>
+                            <p>A comprehensive guide to implementing the data lakehouse architecture, combining the flexibility of data lakes with the structure and performance of data warehouses.</p>
+                        </a>
+                        <a href="../mlops-articles/ml-data-validation.html" class="related-item">
+                            <h4>Data Validation for ML: Ensuring Quality Through the Pipeline</h4>
+                            <p>A comprehensive approach to implementing data validation throughout the ML pipeline, from ingestion to inference, including schema definition and constraint checking.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest data engineering techniques and best practices delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="../data-engineering.html">Data Engineering</a></li>
+                        <li><a href="../mlops.html">MLOps</a></li>
+                        <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

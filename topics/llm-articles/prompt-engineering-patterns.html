@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced prompt engineering patterns and techniques for production LLM applications with practical examples">
+    <title>Advanced Prompt Engineering Patterns for Production Applications - TechPOV</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/topics.css">
+    <link rel="icon" href="../../favicon.ico">
+    <style>
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            margin-top: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .article-content h3 {
+            margin-top: 1.75rem;
+            color: var(--gray-800);
+        }
+        
+        .article-meta {
+            margin: 2rem 0;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .article-meta .author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .article-meta .author img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 500;
+        }
+        
+        .article-meta .date {
+            color: var(--gray-500);
+        }
+        
+        .article-meta .reading-time {
+            color: var(--gray-500);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0 2rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .article-toc {
+            background-color: var(--gray-50);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .article-toc h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .article-toc ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+        
+        .article-toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-toc a {
+            color: var(--gray-700);
+            text-decoration: none;
+        }
+        
+        .article-toc a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .code-block {
+            background-color: var(--gray-800);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .pattern-card {
+            background-color: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .pattern-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+        
+        .pattern-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pattern-meta .complexity {
+            background-color: var(--blue-50);
+            color: var(--blue-700);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .pattern-meta .use-case {
+            background-color: var(--green-50);
+            color: var(--green-700);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .pattern-sections {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .pattern-section {
+            background-color: var(--gray-50);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+        }
+        
+        .pattern-section h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--gray-800);
+            font-size: 1.1rem;
+        }
+        
+        .note-box {
+            background-color: var(--blue-50);
+            border-left: 4px solid var(--blue-500);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .note-box h4 {
+            color: var(--blue-700);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning-box {
+            background-color: var(--amber-50);
+            border-left: 4px solid var(--amber-500);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--amber-700);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .related-articles {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .related-articles h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../llm-implementation.html" class="active">LLM Implementation</a></li>
+                    <li><a href="../data-engineering.html">Data Engineering</a></li>
+                    <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="../mlops.html">MLOps</a></li>
+                    <li><a href="../data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Advanced Prompt Engineering Patterns for Production Applications</h1>
+            <p class="lead">A collection of battle-tested prompt patterns and templates for building robust LLM applications</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <a href="index.html" class="back-link">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+            </svg>
+            Back to LLM Articles
+        </a>
+        
+        <article class="article-content">
+            <div class="article-meta">
+                <div class="author">
+                    <img src="../../images/authors/david-kim.jpg" alt="David Kim" onerror="this.src='../../images/default-avatar.svg'">
+                    <div>
+                        <div class="author-name">David Kim</div>
+                        <div class="author-title">Prompt Engineering Lead</div>
+                    </div>
+                </div>
+                <div class="date">June 1, 2023</div>
+                <div class="reading-time">12 min read</div>
+            </div>
+            
+            <div class="article-tags">
+                <span class="tag">Prompt Engineering</span>
+                <span class="tag">Design Patterns</span>
+                <span class="tag">Production</span>
+                <span class="tag">LLM</span>
+                <span class="tag">Templates</span>
+            </div>
+            
+            <div class="article-toc">
+                <h4>Table of Contents</h4>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#chain-of-thought">Chain-of-Thought Pattern</a></li>
+                    <li><a href="#role-prompting">Role-Based Prompting</a></li>
+                    <li><a href="#few-shot">Few-Shot Learning Pattern</a></li>
+                    <li><a href="#step-back">Step-Back Reasoning</a></li>
+                    <li><a href="#tree-of-thought">Tree of Thought Pattern</a></li>
+                    <li><a href="#rag-pattern">RAG Integration Pattern</a></li>
+                    <li><a href="#structured-output">Structured Output Pattern</a></li>
+                    <li><a href="#composition">Prompt Composition</a></li>
+                    <li><a href="#best-practices">Implementation Best Practices</a></li>
+                </ul>
+            </div>
+            
+            <p>Effective prompt engineering is the difference between mediocre and exceptional LLM applications. As LLMs become central to production systems, engineering teams need battle-tested patterns that reliably produce high-quality outputs. This article presents a collection of proven prompt engineering patterns that address common challenges in production LLM applications.</p>
+            
+            <h2 id="introduction">Introduction to Prompt Engineering Patterns</h2>
+            
+            <p>Prompt engineering patterns are reusable templates and strategies for constructing prompts that achieve specific outcomes with large language models. Think of them as design patterns for LLM interaction - abstract solutions to common prompting problems that can be adapted to various contexts.</p>
+            
+            <p>Effective prompt patterns typically offer:</p>
+            
+            <ul>
+                <li><strong>Reliability:</strong> Consistent results across different inputs</li>
+                <li><strong>Specificity:</strong> Targeted approaches for particular tasks</li>
+                <li><strong>Reusability:</strong> Templates that can be adapted across use cases</li>
+                <li><strong>Performance:</strong> Better results than naive prompting approaches</li>
+            </ul>
+            
+            <div class="note-box">
+                <h4>Implementation Note</h4>
+                <p>In production systems, we recommend implementing prompt patterns as modular, versioned templates with parameter placeholders rather than hardcoding them in application logic. This enables easier testing, iteration, and governance.</p>
+            </div>
+            
+            <h2 id="chain-of-thought">Chain-of-Thought Pattern</h2>
+            
+            <div class="pattern-card">
+                <h3>Chain-of-Thought (CoT)</h3>
+                <div class="pattern-meta">
+                    <div class="complexity">Complexity: Medium</div>
+                    <div class="use-case">Use Case: Reasoning, Problem-solving</div>
+                </div>
+                
+                <p>The Chain-of-Thought pattern prompts the model to break down complex reasoning into explicit intermediate steps. By externally representing the reasoning process, models can achieve higher accuracy on tasks requiring multi-step problem solving.</p>
+                
+                <div class="pattern-sections">
+                    <div class="pattern-section">
+                        <h4>Template Pattern</h4>
+                        <p>Solve [problem/task] step-by-step, showing your reasoning for each step.</p>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>Example Implementation</h4>
+                        <div class="code-block">
+                            <pre>
+def create_cot_prompt(question):
+    return f"""
+I need to solve this problem step-by-step:
+
+{question}
+
+Let me think through this systematically:
+1. First, I'll identify what's being asked
+2. Then, I'll determine relevant information
+3. Next, I'll apply the appropriate approach
+4. Finally, I'll verify my solution
+
+Solving step-by-step:
+"""</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>When to Use</h4>
+                        <ul>
+                            <li>Mathematical problem solving</li>
+                            <li>Logical reasoning tasks</li>
+                            <li>Multi-step decision processes</li>
+                            <li>Complex analysis requiring structured thinking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 id="role-prompting">Role-Based Prompting</h2>
+            
+            <div class="pattern-card">
+                <h3>Role-Based Prompting</h3>
+                <div class="pattern-meta">
+                    <div class="complexity">Complexity: Low</div>
+                    <div class="use-case">Use Case: Specialized Knowledge, Perspective</div>
+                </div>
+                
+                <p>Role-based prompting instructs the model to assume a specific persona or role with relevant expertise for the task at hand. This pattern helps in accessing specialized knowledge and consistent behavior patterns associated with particular domains.</p>
+                
+                <div class="pattern-sections">
+                    <div class="pattern-section">
+                        <h4>Template Pattern</h4>
+                        <p>You are a [role] with expertise in [domain]. [Description of the role's knowledge/approach]. Now, [specific task].</p>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>Example Implementation</h4>
+                        <div class="code-block">
+                            <pre>
+def create_role_prompt(role, expertise, task):
+    return f"""
+You are a {role} with expertise in {expertise}.
+You approach problems methodically, using industry best practices.
+You focus on practical, tested solutions rather than theoretical approaches.
+
+Your task is to {task}
+
+Please provide your expert response:
+"""</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>When to Use</h4>
+                        <ul>
+                            <li>Domain-specific knowledge tasks</li>
+                            <li>When consistency in perspective is important</li>
+                            <li>To access specialized terminology and frameworks</li>
+                            <li>For tasks requiring professional standards adherence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4>Common Pitfall</h4>
+                <p>Avoid overly fictional or fantasy roles that might lead to creative but unreliable outputs. Focus on real professional roles with well-defined knowledge domains. Additionally, be aware that role-based prompting doesn't magically grant the model expertise it doesn't have.</p>
+            </div>
+            
+            <h2 id="few-shot">Few-Shot Learning Pattern</h2>
+            
+            <div class="pattern-card">
+                <h3>Few-Shot Learning Pattern</h3>
+                <div class="pattern-meta">
+                    <div class="complexity">Complexity: Medium</div>
+                    <div class="use-case">Use Case: Task Demonstration, Format Consistency</div>
+                </div>
+                
+                <p>The Few-Shot Learning pattern provides explicit examples of inputs and desired outputs before presenting the actual task. This helps the model understand the exact format, style, and approach expected in the response.</p>
+                
+                <div class="pattern-sections">
+                    <div class="pattern-section">
+                        <h4>Template Pattern</h4>
+                        <p>Here are some examples of [task]:<br>
+                        Input: [example input 1]<br>
+                        Output: [example output 1]<br>
+                        Input: [example input 2]<br>
+                        Output: [example output 2]<br>
+                        Now, complete this:<br>
+                        Input: [actual input]<br>
+                        Output:</p>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>Example Implementation</h4>
+                        <div class="code-block">
+                            <pre>
+def create_few_shot_prompt(examples, new_input):
+    prompt = "I'll show you examples of how to perform this task, then ask you to do it for a new input.\n\n"
+    
+    for ex in examples:
+        prompt += f"Input: {ex['input']}\n"
+        prompt += f"Output: {ex['output']}\n\n"
+    
+    prompt += f"Input: {new_input}\n"
+    prompt += "Output:"
+    
+    return prompt</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>When to Use</h4>
+                        <ul>
+                            <li>Format-sensitive tasks</li>
+                            <li>Classification with specific output categories</li>
+                            <li>When consistency across outputs is critical</li>
+                            <li>For tasks with unique or specialized formats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 id="step-back">Step-Back Reasoning</h2>
+            
+            <div class="pattern-card">
+                <h3>Step-Back Reasoning</h3>
+                <div class="pattern-meta">
+                    <div class="complexity">Complexity: High</div>
+                    <div class="use-case">Use Case: Complex Problem Solving, Avoiding Tunnel Vision</div>
+                </div>
+                
+                <p>The Step-Back Reasoning pattern instructs the model to first analyze the broader context or underlying principles before diving into specific details. This helps avoid tunnel vision and improves performance on problems requiring conceptual understanding.</p>
+                
+                <div class="pattern-sections">
+                    <div class="pattern-section">
+                        <h4>Template Pattern</h4>
+                        <p>Before solving [problem], take a step back and identify the fundamental principles or concepts involved. Then, apply these principles to solve the problem.</p>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>Example Implementation</h4>
+                        <div class="code-block">
+                            <pre>
+def create_step_back_prompt(problem):
+    return f"""
+I need to solve the following problem:
+{problem}
+
+Before diving into the specific solution, I'll take a step back and:
+1. Identify the general category of this problem
+2. Recall the key principles or frameworks relevant to this type of problem
+3. Consider different approaches based on these principles
+4. Select the most appropriate approach
+
+General analysis:
+[First, I'll analyze the broader context and principles]
+
+Specific solution:
+[Now I'll apply these principles to solve the specific problem]
+"""</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-section">
+                        <h4>When to Use</h4>
+                        <ul>
+                            <li>Problems requiring conceptual understanding</li>
+                            <li>When direct approaches lead to errors</li>
+                            <li>For tasks benefiting from domain principles</li>
+                            <li>Problems with potential misinterpretations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+        <div class="related-articles">
+            <h3>Related Articles</h3>
+            <div class="related-grid">
+                <a href="systematic-prompt-testing.html" class="article-item">
+                    <h3>Systematic Prompt Testing Methodology for Robust LLM Applications</h3>
+                    <div class="article-meta">
+                        <span class="author">By Priya Sharma</span>
+                        <span class="date">May 22, 2023</span>
+                    </div>
+                    <p>A framework for systematically testing and improving prompts through controlled experimentation.</p>
+                </a>
+                
+                <a href="prompt-version-control.html" class="article-item">
+                    <h3>Prompt Version Control and Governance for Enterprise Applications</h3>
+                    <div class="article-meta">
+                        <span class="author">By James Wilson</span>
+                        <span class="date">May 10, 2023</span>
+                    </div>
+                    <p>Implementation strategies for treating prompts as critical business assets with version control.</p>
+                </a>
+                
+                <a href="rag-architecture.html" class="article-item">
+                    <h3>RAG System Architecture: Components, Trade-offs, and Scalability</h3>
+                    <div class="article-meta">
+                        <span class="author">By Michael Chang</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <p>A comprehensive guide to designing and implementing retrieval augmented generation systems.</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest LLM implementation techniques and best practices delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="../data-engineering.html">Data Engineering</a></li>
+                        <li><a href="../mlops.html">MLOps</a></li>
+                        <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive collection of articles on platform engineering, IDP, DevOps, and cloud infrastructure for technical practitioners">
+    <title>Platform Engineering Articles - TechPOV</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/topics.css">
+    <link rel="icon" href="../../favicon.ico">
+    <style>
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .article-category {
+            margin-top: 3rem;
+        }
+        
+        .article-category h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+        
+        .category-desc {
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .article-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .article-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .article-item h3 {
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+        
+        .article-item p {
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+            flex-grow: 1;
+        }
+        
+        .article-meta {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tags {
+            margin-bottom: 1rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="../data-engineering.html">Data Engineering</a></li>
+                    <li><a href="../platform-engineering.html" class="active">Platform Engineering</a></li>
+                    <li><a href="../mlops.html">MLOps</a></li>
+                    <li><a href="../data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Platform Engineering Articles</h1>
+            <p class="lead">In-depth guides and best practices for building developer platforms and self-service infrastructure</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <a href="../platform-engineering.html" class="back-link">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+            </svg>
+            Back to Platform Engineering Overview
+        </a>
+        
+        <section class="article-category">
+            <h2>Internal Developer Platforms</h2>
+            <p class="category-desc">Designing, building, and implementing effective internal developer platforms (IDPs) to enhance developer productivity.</p>
+            
+            <div class="article-grid">
+                <a href="idp-architecture-patterns.html" class="article-item">
+                    <h3>IDP Architecture Patterns: Designing for Developer Experience</h3>
+                    <div class="article-meta">
+                        <span class="author">By Emma Mitchell</span>
+                        <span class="date">June 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">IDP</span>
+                        <span class="tag">Architecture</span>
+                        <span class="tag">DevEx</span>
+                    </div>
+                    <p>Key architectural patterns for designing effective internal developer platforms, including service composition, API design, and developer workflow optimization with practical examples from successful implementations.</p>
+                </a>
+                
+                <a href="golden-paths-implementation.html" class="article-item">
+                    <h3>Implementing Golden Paths: From Design to Adoption</h3>
+                    <div class="article-meta">
+                        <span class="author">By Jason Kim</span>
+                        <span class="date">May 28, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Golden Paths</span>
+                        <span class="tag">Developer Experience</span>
+                        <span class="tag">Implementation</span>
+                    </div>
+                    <p>A comprehensive guide to designing, implementing, and driving adoption of Golden Paths in platform engineering, including templates, tooling integration, documentation, and developer feedback loops.</p>
+                </a>
+                
+                <a href="idp-self-service-capabilities.html" class="article-item">
+                    <h3>Building Self-Service Capabilities in Internal Developer Platforms</h3>
+                    <div class="article-meta">
+                        <span class="author">By David Chen</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Self-service</span>
+                        <span class="tag">IDP</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                    <p>Implementing effective self-service capabilities in internal developer platforms, including environment provisioning, data access, deployment pipelines, and testing infrastructure with real-world implementation examples.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Infrastructure as Code</h2>
+            <p class="category-desc">Modern approaches to infrastructure as code, declarative configurations, and GitOps workflows.</p>
+            
+            <div class="article-grid">
+                <a href="terraform-at-scale.html" class="article-item">
+                    <h3>Terraform at Scale: Architecture and Best Practices</h3>
+                    <div class="article-meta">
+                        <span class="author">By Sarah Johnson</span>
+                        <span class="date">May 20, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Terraform</span>
+                        <span class="tag">IaC</span>
+                        <span class="tag">Scaling</span>
+                    </div>
+                    <p>Architectural patterns and implementation strategies for scaling Terraform in enterprise environments, including module design, state management, workflow automation, and team collaboration approaches.</p>
+                </a>
+                
+                <a href="pulumi-vs-terraform-comparison.html" class="article-item">
+                    <h3>Pulumi vs. Terraform: When to Use Each and Why</h3>
+                    <div class="article-meta">
+                        <span class="author">By Michael Wong</span>
+                        <span class="date">June 10, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Pulumi</span>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">IaC Comparison</span>
+                    </div>
+                    <p>A detailed technical comparison of Pulumi and Terraform for infrastructure as code, including programming model analysis, state management approaches, ecosystem integration, and decision framework for choosing the right tool.</p>
+                </a>
+                
+                <a href="gitops-for-infrastructure.html" class="article-item">
+                    <h3>GitOps for Infrastructure: Implementation Patterns</h3>
+                    <div class="article-meta">
+                        <span class="author">By Raj Patel</span>
+                        <span class="date">May 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">GitOps</span>
+                        <span class="tag">Infrastructure</span>
+                        <span class="tag">CI/CD</span>
+                    </div>
+                    <p>Implementation patterns for applying GitOps principles to infrastructure management, including repository structure, CI/CD pipeline design, approval workflows, and security considerations with tools like Flux and ArgoCD.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Kubernetes & Container Orchestration</h2>
+            <p class="category-desc">Advanced Kubernetes patterns, best practices, and production-ready implementations.</p>
+            
+            <div class="article-grid">
+                <a href="k8s-platform-architecture.html" class="article-item">
+                    <h3>Building a Kubernetes Platform: Architecture and Design Decisions</h3>
+                    <div class="article-meta">
+                        <span class="author">By Lisa Chen</span>
+                        <span class="date">June 12, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Platform</span>
+                        <span class="tag">Architecture</span>
+                    </div>
+                    <p>Architectural patterns and design decisions for building a comprehensive Kubernetes platform, including cluster topology, networking models, security architecture, and integration with platform services.</p>
+                </a>
+                
+                <a href="k8s-multi-tenancy.html" class="article-item">
+                    <h3>Kubernetes Multi-tenancy: Models and Implementation</h3>
+                    <div class="article-meta">
+                        <span class="author">By Alex Rodriguez</span>
+                        <span class="date">May 25, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Multi-tenancy</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Isolation</span>
+                    </div>
+                    <p>Technical approaches to implementing multi-tenancy in Kubernetes environments, including namespace-based isolation, cluster-based isolation, and hybrid models with implementation details for resource allocation, network policies, and access controls.</p>
+                </a>
+                
+                <a href="kubernetes-operators.html" class="article-item">
+                    <h3>Designing and Implementing Kubernetes Operators</h3>
+                    <div class="article-meta">
+                        <span class="author">By Elena Garcia</span>
+                        <span class="date">June 8, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Operators</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Custom Resources</span>
+                    </div>
+                    <p>A comprehensive guide to designing, implementing, and deploying Kubernetes Operators using the Operator SDK, including reconciliation patterns, state management, failure handling, and versioning strategies with practical examples.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Developer Experience (DevEx)</h2>
+            <p class="category-desc">Designing and implementing tools, workflows, and interfaces that enhance developer productivity and satisfaction.</p>
+            
+            <div class="article-grid">
+                <a href="developer-portals.html" class="article-item">
+                    <h3>Building Effective Developer Portals: Architecture and Implementation</h3>
+                    <div class="article-meta">
+                        <span class="author">By Marcus Johnson</span>
+                        <span class="date">June 20, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Developer Portal</span>
+                        <span class="tag">Backstage</span>
+                        <span class="tag">DevEx</span>
+                    </div>
+                    <p>Technical approaches to building developer portals with Backstage or custom solutions, including service catalog implementation, integration with existing tools, plugin architecture, and adoption strategies.</p>
+                </a>
+                
+                <a href="devex-metrics-measurement.html" class="article-item">
+                    <h3>Measuring Developer Experience: Metrics and Implementation</h3>
+                    <div class="article-meta">
+                        <span class="author">By Jessica Kim</span>
+                        <span class="date">May 30, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Metrics</span>
+                        <span class="tag">DevEx</span>
+                        <span class="tag">DORA</span>
+                    </div>
+                    <p>Implementation strategies for measuring developer experience and productivity, including DORA metrics collection, developer satisfaction surveys, platform adoption metrics, and building dashboards for platform engineering teams.</p>
+                </a>
+                
+                <a href="dev-environments-as-code.html" class="article-item">
+                    <h3>Development Environments as Code: Patterns and Implementations</h3>
+                    <div class="article-meta">
+                        <span class="author">By Thomas Wright</span>
+                        <span class="date">June 2, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Dev Environments</span>
+                        <span class="tag">Codespaces</span>
+                        <span class="tag">Gitpod</span>
+                    </div>
+                    <p>Architectural patterns for implementing development environments as code, including container-based approaches, remote development environments, and virtual machine-based solutions with detailed implementations using GitHub Codespaces, Gitpod, and custom solutions.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Cloud Architecture</h2>
+            <p class="category-desc">Cloud architecture patterns, multi-cloud strategies, and infrastructure optimization approaches.</p>
+            
+            <div class="article-grid">
+                <a href="cloud-architecture-patterns.html" class="article-item">
+                    <h3>Modern Cloud Architecture Patterns for Scalable Applications</h3>
+                    <div class="article-meta">
+                        <span class="author">By Daniel Lee</span>
+                        <span class="date">May 18, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Architecture</span>
+                        <span class="tag">Cloud</span>
+                        <span class="tag">Scaling</span>
+                    </div>
+                    <p>Essential cloud architecture patterns for building scalable, resilient applications, including event-driven architectures, serverless patterns, microservices approaches, and hybrid deployment models with implementation examples.</p>
+                </a>
+                
+                <a href="multi-cloud-strategies.html" class="article-item">
+                    <h3>Multi-cloud Strategy: Architecture, Implementation, and Trade-offs</h3>
+                    <div class="article-meta">
+                        <span class="author">By Maria Garcia</span>
+                        <span class="date">June 15, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Multi-cloud</span>
+                        <span class="tag">Architecture</span>
+                        <span class="tag">Strategy</span>
+                    </div>
+                    <p>Technical approaches to implementing effective multi-cloud strategies, including abstraction layers, workload placement decisions, data synchronization patterns, and observability across clouds with real-world implementation examples.</p>
+                </a>
+                
+                <a href="cloud-cost-optimization.html" class="article-item">
+                    <h3>Cloud Cost Optimization: Implementation Strategies for Platform Teams</h3>
+                    <div class="article-meta">
+                        <span class="author">By Omar Hassan</span>
+                        <span class="date">May 22, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Cost Optimization</span>
+                        <span class="tag">FinOps</span>
+                        <span class="tag">Cloud Efficiency</span>
+                    </div>
+                    <p>Practical strategies for implementing cloud cost optimization as part of platform engineering, including resource right-sizing, automated scaling, spot instance usage, cost allocation, and building cost awareness tools for development teams.</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="article-category">
+            <h2>Security & Compliance</h2>
+            <p class="category-desc">Integrating security and compliance into platform engineering and developer workflows.</p>
+            
+            <div class="article-grid">
+                <a href="devsecops-implementation.html" class="article-item">
+                    <h3>DevSecOps Implementation: Integrating Security into Platform Engineering</h3>
+                    <div class="article-meta">
+                        <span class="author">By Priya Sharma</span>
+                        <span class="date">June 5, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">DevSecOps</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">CI/CD</span>
+                    </div>
+                    <p>Architectural approaches and implementation patterns for integrating security into platform engineering and developer workflows, including SAST/DAST integration, container scanning, policy enforcement, and security observability.</p>
+                </a>
+                
+                <a href="zero-trust-platform.html" class="article-item">
+                    <h3>Zero Trust Architecture for Platform Engineering</h3>
+                    <div class="article-meta">
+                        <span class="author">By James Wilson</span>
+                        <span class="date">May 25, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Zero Trust</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Identity</span>
+                    </div>
+                    <p>Implementing zero trust architecture principles in platform engineering, including identity-based access controls, service mesh security, micro-segmentation, and secrets management with practical implementation strategies and tool selection.</p>
+                </a>
+                
+                <a href="compliance-as-code.html" class="article-item">
+                    <h3>Compliance as Code: Automating Compliance in Platform Engineering</h3>
+                    <div class="article-meta">
+                        <span class="author">By Sophia Wu</span>
+                        <span class="date">June 12, 2023</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Compliance</span>
+                        <span class="tag">Automation</span>
+                        <span class="tag">Policy as Code</span>
+                    </div>
+                    <p>Technical approaches to implementing compliance as code, including policy definition with OPA/Rego, infrastructure validation with tools like Checkov and tfsec, continuous compliance monitoring, and automated evidence collection for audits.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest platform engineering techniques and best practices delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../about.html">About</a></li>
+                        <li><a href="../../contribute.html">Contribute</a></li>
+                        <li><a href="../../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="../llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="../data-engineering.html">Data Engineering</a></li>
+                        <li><a href="../mlops.html">MLOps</a></li>
+                        <li><a href="../platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expert insights on MLOps practices, tools, and implementation strategies for machine learning in production">
+    <title>MLOps - TechPOV</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/topics.css">
+    <link rel="icon" href="../favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="data-engineering.html">Data Engineering</a></li>
+                    <li><a href="platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="mlops.html" class="active">MLOps</a></li>
+                    <li><a href="data-visualization.html">Data Visualization</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>MLOps</h1>
+            <p class="lead">Best practices and tools for operationalizing machine learning models at scale</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="content-layout">
+            <div class="main-content">
+                <section class="intro-section">
+                    <h2>MLOps: Bridging ML Development and Production</h2>
+                    <p>MLOps (Machine Learning Operations) combines machine learning, DevOps, and data engineering to streamline the end-to-end ML lifecycle. It addresses the unique challenges of deploying and maintaining ML systems in production, from experiment tracking and model versioning to monitoring and governance.</p>
+                    
+                    <div class="architecture-diagram">
+                        <svg viewBox="0 0 800 400" width="100%" height="auto">
+                            <rect x="50" y="50" width="700" height="300" rx="10" ry="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                            
+                            <!-- Data Processing -->
+                            <rect x="100" y="90" width="150" height="60" rx="5" ry="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+                            <text x="175" y="120" font-size="14" text-anchor="middle" fill="#1e40af">Data Processing</text>
+                            <text x="175" y="138" font-size="10" text-anchor="middle" fill="#1e40af">Collection, Cleaning, Featurization</text>
+                            
+                            <!-- Model Development -->
+                            <rect x="325" y="90" width="150" height="60" rx="5" ry="5" fill="#e0e7ff" stroke="#a5b4fc" stroke-width="2"/>
+                            <text x="400" y="120" font-size="14" text-anchor="middle" fill="#3730a3">Model Development</text>
+                            <text x="400" y="138" font-size="10" text-anchor="middle" fill="#3730a3">Training, Validation, Experimentation</text>
+                            
+                            <!-- Model Deployment -->
+                            <rect x="550" y="90" width="150" height="60" rx="5" ry="5" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+                            <text x="625" y="120" font-size="14" text-anchor="middle" fill="#5b21b6">Model Deployment</text>
+                            <text x="625" y="138" font-size="10" text-anchor="middle" fill="#5b21b6">Packaging, Serving, Scaling</text>
+                            
+                            <!-- CI/CD -->
+                            <rect x="100" y="200" width="150" height="60" rx="5" ry="5" fill="#fae8ff" stroke="#e9d5ff" stroke-width="2"/>
+                            <text x="175" y="230" font-size="14" text-anchor="middle" fill="#701a75">CI/CD Pipeline</text>
+                            <text x="175" y="248" font-size="10" text-anchor="middle" fill="#701a75">Testing, Versioning, Automation</text>
+                            
+                            <!-- Monitoring -->
+                            <rect x="325" y="200" width="150" height="60" rx="5" ry="5" fill="#fce7f3" stroke="#fbcfe8" stroke-width="2"/>
+                            <text x="400" y="230" font-size="14" text-anchor="middle" fill="#9d174d">Monitoring</text>
+                            <text x="400" y="248" font-size="10" text-anchor="middle" fill="#9d174d">Metrics, Drift Detection, Alerting</text>
+                            
+                            <!-- Governance -->
+                            <rect x="550" y="200" width="150" height="60" rx="5" ry="5" fill="#fef3c7" stroke="#fde68a" stroke-width="2"/>
+                            <text x="625" y="230" font-size="14" text-anchor="middle" fill="#92400e">Governance</text>
+                            <text x="625" y="248" font-size="10" text-anchor="middle" fill="#92400e">Compliance, Documentation, Lineage</text>
+                            
+                            <!-- Continuous Feedback -->
+                            <rect x="100" y="310" width="600" height="30" rx="5" ry="5" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="2"/>
+                            <text x="400" y="330" font-size="14" text-anchor="middle" fill="#065f46">Continuous Feedback &amp; Improvement Loop</text>
+                            
+                            <!-- Connect arrows -->
+                            <line x1="250" y1="120" x2="325" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="475" y1="120" x2="550" y2="120" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="175" y1="150" x2="175" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="400" y1="150" x2="400" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="625" y1="150" x2="625" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="175" y1="260" x2="175" y2="310" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="400" y1="260" x2="400" y2="310" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="625" y1="260" x2="625" y2="310" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <path d="M700,310 Q720,310 720,225 Q720,170 700,170" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <path d="M100,310 Q80,310 80,225 Q80,170 100,170" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            
+                            <!-- Arrow marker definition -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                        <div class="diagram-caption">MLOps Lifecycle and Components</div>
+                    </div>
+                </section>
+
+                <section class="articles-section">
+                    <h2>Latest Insights</h2>
+                    
+                    <article class="article-card">
+                        <h3>Feature Stores: The Missing Piece in Many ML Pipelines</h3>
+                        <div class="article-meta">
+                            <span class="author">By Michael Chang</span>
+                            <span class="date">June 8, 2023</span>
+                        </div>
+                        <p>How feature stores solve the challenge of managing, sharing, and serving machine learning features at scale. This article covers the key components of a feature store, when to implement one, and a comparison of popular open-source and commercial solutions.</p>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Continuous Training: Automating the ML Retraining Pipeline</h3>
+                        <div class="article-meta">
+                            <span class="author">By Leila Rodriguez</span>
+                            <span class="date">May 17, 2023</span>
+                        </div>
+                        <p>A comprehensive guide to implementing continuous training for machine learning models. Learn how to set up triggers for model retraining, automate the validation process, and safely promote new models to production with minimal human intervention.</p>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Beyond Accuracy: A Holistic Approach to ML Monitoring</h3>
+                        <div class="article-meta">
+                            <span class="author">By David Okonkwo</span>
+                            <span class="date">April 29, 2023</span>
+                        </div>
+                        <p>Monitoring machine learning systems requires looking beyond simple accuracy metrics. This article presents a comprehensive framework for monitoring model health, data drift, operational metrics, and business impact to ensure robust ML systems in production.</p>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>ML Model Governance: From Development to Retirement</h3>
+                        <div class="article-meta">
+                            <span class="author">By Sanjay Patel</span>
+                            <span class="date">April 5, 2023</span>
+                        </div>
+                        <p>Implementing effective governance for machine learning systems throughout their lifecycle. This article covers model documentation, approval workflows, auditability, and responsible retirement of ML models to maintain compliance and trust.</p>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+
+                    <div class="article-card">
+                        <h3>Model Monitoring Architectures</h3>
+                        <p>Designing robust systems for monitoring machine learning models in production, including drift detection, performance degradation, and resource utilization.</p>
+                        <div class="article-meta">
+                            <span class="author">By Dana Chen</span>
+                            <span class="date">May 18, 2023</span>
+                        </div>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </div>
+
+                    <div class="article-card">
+                        <h3>CI/CD Pipelines for ML Systems</h3>
+                        <p>Building automated pipelines for testing, validating, and deploying machine learning models using modern DevOps practices.</p>
+                        <div class="article-meta">
+                            <span class="author">By Marcus Johnson</span>
+                            <span class="date">May 5, 2023</span>
+                        </div>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </div>
+
+                    <div class="article-card">
+                        <h3>Feature Store Architectures</h3>
+                        <p>Implementing feature stores to manage, share, and serve machine learning features across organizations, ensuring consistency between training and inference.</p>
+                        <div class="article-meta">
+                            <span class="author">By Priya Sharma</span>
+                            <span class="date">April 22, 2023</span>
+                        </div>
+                        <a href="mlops-articles/index.html" class="read-more">Read Article</a>
+                    </div>
+
+                    <div class="article-card">
+                        <h3>MLOps for Large Language Models</h3>
+                        <p>Specialized MLOps practices for managing large language models in production, including fine-tuning workflows, prompt management, and efficient inference.</p>
+                        <div class="article-meta">
+                            <span class="author">By James Wilson</span>
+                            <span class="date">April 10, 2023</span>
+                        </div>
+                        <a href="mlops-articles/index.html" class="read-more">View All Articles</a>
+                    </div>
+                </section>
+
+                <section class="best-practices">
+                    <h2>Best Practices</h2>
+                    <div class="practices-grid">
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,5C11.05,5 10.05,5.16 9.34,5.44C9.88,4.94 10,4.39 10,4H9C9,4.2 8.94,4.39 8.83,4.56C8.66,4.38 8.5,4.19 8.5,4H7.5C7.5,4.5 7.83,4.96 8.26,5.31C7.46,5.87 7,6.91 7,8C7,10 9,11.5 12,11.5C15,11.5 17,10 17,8C17,6 15,5 12,5M12,10.5C9.67,10.5 8,9.5 8,8C8,6.5 9.67,5.5 12,5.5C14.33,5.5 16,6.5 16,8C16,9.5 14.33,10.5 12,10.5M5,18V19H19V18C19,15.79 15.42,14 12,14C8.58,14 5,15.79 5,18M12,13C14.12,13 16.47,13.5 18.04,14.32C16.97,14.82 14.87,15 12,15C9.13,15 7.03,14.82 5.96,14.32C7.53,13.5 9.88,13 12,13M12,4C10.9,4 10,3.1 10,2H14C14,3.1 13.1,4 12,4Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Treat Data as Code</h4>
+                            <p>Apply version control, validation, and testing to datasets just as you would with source code to ensure reproducibility and data quality.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L6.04,7.5L12,10.85L17.96,7.5L12,4.15M5,15.91L11,19.29V12.58L5,9.21V15.91M19,15.91V9.21L13,12.58V19.29L19,15.91Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Create Reproducible Pipelines</h4>
+                            <p>Build end-to-end ML pipelines that are reproducible, parameterized, and tracked to enable consistent model rebuilding and auditing.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M14,12H10V10H14M14,16H10V14H14M20,8H17.19C16.74,7.22 16.12,6.55 15.37,6.04L17,4.41L15.59,3L13.42,5.17C12.96,5.06 12.5,5 12,5C11.5,5 11.04,5.06 10.59,5.17L8.41,3L7,4.41L8.62,6.04C7.88,6.55 7.26,7.22 6.81,8H4V10H6.09C6.04,10.33 6,10.66 6,11V12H4V14H6V15C6,15.34 6.04,15.67 6.09,16H4V18H6.81C7.85,19.79 9.78,21 12,21C14.22,21 16.15,19.79 17.19,18H20V16H17.91C17.96,15.67 18,15.34 18,15V14H20V12H18V11C18,10.66 17.96,10.33 17.91,10H20V8Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Implement Model Monitoring</h4>
+                            <p>Deploy comprehensive monitoring that tracks model performance, data drift, and system health to enable early detection of issues.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Document Everything</h4>
+                            <p>Maintain comprehensive documentation of models, data, and decisions to ensure transparency, knowledge sharing, and compliance with regulations.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Enable Fast Rollbacks</h4>
+                            <p>Design systems that can quickly revert to previous model versions when issues are detected to minimize impact of problematic deployments.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Test for Failure Modes</h4>
+                            <p>Regularly test how your ML systems handle data errors, pipeline failures, and edge cases to build resilient production systems.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <aside class="sidebar">
+                <div class="sidebar-section toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#intro-section">MLOps: Bridging ML Development and Production</a></li>
+                        <li><a href="#articles-section">Latest Insights</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section popular">
+                    <h3>Popular Articles</h3>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">CI/CD for Machine Learning</span>
+                                <span class="views">5.7K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">Orchestrating ML Workflows with Airflow</span>
+                                <span class="views">4.9K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">Model Registry Best Practices</span>
+                                <span class="views">4.2K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">Containerizing ML Models with Docker</span>
+                                <span class="views">3.6K views</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section resources">
+                    <h3>Key Technologies</h3>
+                    <ul>
+                        <li><a href="#">MLflow</a></li>
+                        <li><a href="#">Kubeflow</a></li>
+                        <li><a href="#">Feast</a></li>
+                        <li><a href="#">Evidently</a></li>
+                        <li><a href="#">Seldon Core</a></li>
+                        <li><a href="#">BentoML</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest MLOps tools, techniques, and best practices delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../contribute.html">Contribute</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="data-engineering.html">Data Engineering</a></li>
+                        <li><a href="mlops.html">MLOps</a></li>
+                        <li><a href="platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

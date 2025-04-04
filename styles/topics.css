@@ -1,0 +1,236 @@
+/* Topic page specific styles */
+
+/* Page Hero */
+.page-hero {
+    background-color: var(--gray-900);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.page-hero h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.page-hero .lead {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--gray-300);
+}
+
+/* Content Layout */
+.content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 3rem;
+    margin: 3rem 0;
+}
+
+.main-content {
+    min-width: 0;
+}
+
+/* Sections */
+.intro-section, .articles-section, .best-practices {
+    margin-bottom: 4rem;
+}
+
+/* Architecture Diagram */
+.architecture-diagram {
+    margin: 2rem 0;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.diagram-caption {
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--gray-600);
+    font-style: italic;
+}
+
+/* Article Cards */
+.article-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.article-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.article-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--gray-500);
+}
+
+/* Best Practices */
+.practices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.practice-item {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.practice-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.practice-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    background-color: var(--gray-100);
+    color: var(--primary);
+}
+
+.practice-item h4 {
+    margin-bottom: 0.75rem;
+}
+
+.practice-item p {
+    color: var(--gray-600);
+    margin-bottom: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    align-self: start;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-section {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-section h3 {
+    margin-bottom: 1rem;
+    color: var(--gray-900);
+    font-size: 1.25rem;
+}
+
+.sidebar-section ul {
+    list-style: none;
+}
+
+.sidebar-section ul li {
+    margin-bottom: 0.75rem;
+}
+
+/* Table of Contents */
+.toc ul li a {
+    display: block;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    color: var(--gray-700);
+}
+
+.toc ul li a:hover {
+    background-color: var(--gray-100);
+    color: var(--primary);
+}
+
+/* Popular Articles */
+.popular ul li a {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.popular ul li a:hover {
+    background-color: var(--gray-100);
+}
+
+.popular .title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--gray-800);
+}
+
+.popular .views {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+/* Resources */
+.resources ul li a {
+    display: block;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    color: var(--gray-700);
+}
+
+.resources ul li a:hover {
+    background-color: var(--gray-100);
+    color: var(--primary);
+}
+
+/* Active nav link */
+nav ul li a.active {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Media Queries */
+@media screen and (max-width: 900px) {
+    .content-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        position: static;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .page-hero {
+        padding: 3rem 0;
+    }
+    
+    .practices-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .article-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+} 

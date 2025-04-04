@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expert insights on data visualization principles, tools, and best practices for effectively communicating with data">
+    <title>Data Visualization - TechPOV</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/topics.css">
+    <link rel="icon" href="../favicon.ico">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechPOV</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="llm-implementation.html">LLM Implementation</a></li>
+                    <li><a href="data-engineering.html">Data Engineering</a></li>
+                    <li><a href="platform-engineering.html">Platform Engineering</a></li>
+                    <li><a href="mlops.html">MLOps</a></li>
+                    <li><a href="data-visualization.html" class="active">Data Visualization</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="container">
+            <h1>Data Visualization</h1>
+            <p class="lead">Principles and techniques for creating effective visual representations of data</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="content-layout">
+            <div class="main-content">
+                <section class="intro-section">
+                    <h2>The Power of Data Visualization</h2>
+                    <p>Data visualization transforms raw numbers into meaningful visual insights that can drive better decisions. Effective visualizations make complex data accessible, reveal patterns and outliers, and communicate findings in a way that engages stakeholders across technical and non-technical backgrounds.</p>
+                    
+                    <div class="architecture-diagram">
+                        <svg viewBox="0 0 800 400" width="100%" height="auto">
+                            <rect x="50" y="50" width="700" height="300" rx="10" ry="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                            
+                            <!-- Data Source Layer -->
+                            <rect x="100" y="90" width="600" height="40" rx="5" ry="5" fill="#dbeafe" stroke="#93c5fd" stroke-width="2"/>
+                            <text x="400" y="115" font-size="14" text-anchor="middle" fill="#1e40af">Data Sources: Databases, APIs, Files, Streams</text>
+                            
+                            <!-- Data Preparation Layer -->
+                            <rect x="100" y="150" width="600" height="40" rx="5" ry="5" fill="#e0e7ff" stroke="#a5b4fc" stroke-width="2"/>
+                            <text x="400" y="175" font-size="14" text-anchor="middle" fill="#3730a3">Data Preparation: Cleaning, Transforming, Aggregating</text>
+                            
+                            <!-- Visualization Types Layer -->
+                            <rect x="100" y="210" width="180" height="100" rx="5" ry="5" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+                            <text x="190" y="230" font-size="14" text-anchor="middle" fill="#5b21b6">Statistical Visualization</text>
+                            <text x="190" y="250" font-size="10" text-anchor="middle" fill="#5b21b6">• Bar/Line Charts</text>
+                            <text x="190" y="270" font-size="10" text-anchor="middle" fill="#5b21b6">• Scatter Plots</text>
+                            <text x="190" y="290" font-size="10" text-anchor="middle" fill="#5b21b6">• Histograms</text>
+                            
+                            <rect x="310" y="210" width="180" height="100" rx="5" ry="5" fill="#fae8ff" stroke="#e9d5ff" stroke-width="2"/>
+                            <text x="400" y="230" font-size="14" text-anchor="middle" fill="#701a75">Relationship Visualization</text>
+                            <text x="400" y="250" font-size="10" text-anchor="middle" fill="#701a75">• Network Graphs</text>
+                            <text x="400" y="270" font-size="10" text-anchor="middle" fill="#701a75">• Heatmaps</text>
+                            <text x="400" y="290" font-size="10" text-anchor="middle" fill="#701a75">• Correlation Matrices</text>
+                            
+                            <rect x="520" y="210" width="180" height="100" rx="5" ry="5" fill="#fce7f3" stroke="#fbcfe8" stroke-width="2"/>
+                            <text x="610" y="230" font-size="14" text-anchor="middle" fill="#9d174d">Geospatial Visualization</text>
+                            <text x="610" y="250" font-size="10" text-anchor="middle" fill="#9d174d">• Choropleth Maps</text>
+                            <text x="610" y="270" font-size="10" text-anchor="middle" fill="#9d174d">• Point Maps</text>
+                            <text x="610" y="290" font-size="10" text-anchor="middle" fill="#9d174d">• Flow Maps</text>
+                            
+                            <!-- Presentation Layer -->
+                            <rect x="100" y="330" width="600" height="40" rx="5" ry="5" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="2"/>
+                            <text x="400" y="355" font-size="14" text-anchor="middle" fill="#065f46">Delivery: Dashboards, Reports, Interactive Applications, Presentations</text>
+                            
+                            <!-- Connect arrows -->
+                            <line x1="400" y1="130" x2="400" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="190" y1="190" x2="190" y2="210" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="400" y1="190" x2="400" y2="210" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="610" y1="190" x2="610" y2="210" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="190" y1="310" x2="190" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="400" y1="310" x2="400" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="610" y1="310" x2="610" y2="330" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            
+                            <!-- Arrow marker definition -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                        <div class="diagram-caption">Data Visualization Workflow</div>
+                    </div>
+                </section>
+
+                <section class="articles-section">
+                    <h2>Latest Insights</h2>
+                    
+                    <article class="article-card">
+                        <h3>Data Visualization Design Framework for Technical Audiences</h3>
+                        <p>A comprehensive framework for designing effective data visualizations specifically for technical audiences.</p>
+                        <div class="article-meta">
+                            <span class="author">By Emma Mitchell</span>
+                            <span class="date">June 15, 2023</span>
+                        </div>
+                        <a href="data-visualization-articles/visualization-design-framework.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Chart Selection Guide: Matching Visualization to Data Types</h3>
+                        <p>A structured decision framework for selecting the most appropriate visualization type based on data characteristics.</p>
+                        <div class="article-meta">
+                            <span class="author">By Alex Rodriguez</span>
+                            <span class="date">May 28, 2023</span>
+                        </div>
+                        <a href="data-visualization-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Interactive Visualization Patterns: Design and Implementation</h3>
+                        <p>Key patterns for designing effective interactive visualizations, including drill-down techniques and coordinated views.</p>
+                        <div class="article-meta">
+                            <span class="author">By Michael Wong</span>
+                            <span class="date">June 10, 2023</span>
+                        </div>
+                        <a href="data-visualization-articles/index.html" class="read-more">Read Article</a>
+                    </article>
+                    
+                    <article class="article-card">
+                        <h3>Visualizing Model Explainability: From SHAP to Feature Importance</h3>
+                        <p>Technical approaches to visualizing machine learning model explainability with implementation examples.</p>
+                        <div class="article-meta">
+                            <span class="author">By Priya Sharma</span>
+                            <span class="date">June 5, 2023</span>
+                        </div>
+                        <a href="data-visualization-articles/index.html" class="read-more">View All Articles</a>
+                    </article>
+                </section>
+
+                <section class="best-practices">
+                    <h2>Best Practices</h2>
+                    <div class="practices-grid">
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M3,3H21V5H3V3M9,7H21V9H9V7M3,11H21V13H3V11M9,15H21V17H9V15M3,19H21V21H3V19Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Start with Clear Objectives</h4>
+                            <p>Define the specific questions you want to answer and the audience who will consume the visualization before selecting visualization types.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M13,17H8V15H13V17M16,13H8V11H16V13M16,9H8V7H16V9Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Prioritize Data-Ink Ratio</h4>
+                            <p>Maximize the ratio of data to non-data elements by removing chart junk, redundant information, and unnecessary decorative elements.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M12,16A3,3 0 0,1 9,13C9,11.88 9.61,10.9 10.5,10.39L20.21,4.77L14.68,14.35C14.18,15.33 13.17,16 12,16M12,3C13.81,3 15.5,3.5 16.97,4.32L14.87,5.53C14,5.19 13,5 12,5A8,8 0 0,0 4,13C4,15.21 4.89,17.21 6.34,18.65H6.35C6.74,19.04 6.74,19.67 6.35,20.06C5.96,20.45 5.32,20.45 4.93,20.07V20.07C3.12,18.26 2,15.76 2,13A10,10 0 0,1 12,3M22,13C22,15.76 20.88,18.26 19.07,20.07V20.07C18.68,20.45 18.05,20.45 17.66,20.06C17.27,19.67 17.27,19.04 17.66,18.65V18.65C19.11,17.2 20,15.21 20,13C20,12 19.81,11 19.46,10.1L20.67,8C21.5,9.5 22,11.18 22,13Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Choose Appropriate Scales</h4>
+                            <p>Select axis scales that fairly represent data, avoiding truncated axes that can misrepresent relationships or magnify insignificant differences.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M16.5,16.25C16.5,14.75 13.5,14 12,14C10.5,14 7.5,14.75 7.5,16.25V17H16.5M12,12.25A2.25,2.25 0 0,0 14.25,10A2.25,2.25 0 0,0 12,7.75A2.25,2.25 0 0,0 9.75,10A2.25,2.25 0 0,0 12,12.25Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Design for Accessibility</h4>
+                            <p>Ensure visualizations are accessible to all users by using colorblind-safe palettes, providing text alternatives, and testing with diverse users.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M14,12V19.88C14.04,20.18 13.94,20.5 13.71,20.71C13.32,21.1 12.69,21.1 12.3,20.71L10.29,18.7C10.06,18.47 9.96,18.16 10,17.87V12H9.97L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3V3H19V3C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L14.03,12H14Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Filter Strategically</h4>
+                            <p>Provide filters and interactive elements that allow users to focus on specific segments or time periods without overwhelming them with options.</p>
+                        </div>
+                        
+                        <div class="practice-item">
+                            <div class="practice-icon">
+                                <svg viewBox="0 0 24 24" width="32" height="32">
+                                    <path fill="currentColor" d="M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z"></path>
+                                </svg>
+                            </div>
+                            <h4>Include Clear Context</h4>
+                            <p>Provide necessary context through titles, subtitles, annotations, and explanatory text to help users interpret the data accurately.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <aside class="sidebar">
+                <div class="sidebar-section toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#intro-section">The Power of Data Visualization</a></li>
+                        <li><a href="#articles-section">Latest Insights</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section popular">
+                    <h3>Popular Articles</h3>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span class="title">Data Storytelling Fundamentals</span>
+                                <span class="views">5.3K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">Visualization Ethics: Avoiding Deception</span>
+                                <span class="views">4.8K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">Dashboard Design Patterns</span>
+                                <span class="views">4.1K views</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="title">Visualizing Uncertainty: Best Practices</span>
+                                <span class="views">3.5K views</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section resources">
+                    <h3>Key Technologies</h3>
+                    <ul>
+                        <li><a href="#">D3.js</a></li>
+                        <li><a href="#">Tableau</a></li>
+                        <li><a href="#">Observable</a></li>
+                        <li><a href="#">Python Visualization Libraries</a></li>
+                        <li><a href="#">Power BI</a></li>
+                        <li><a href="#">Looker</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest data visualization techniques and insights delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>TechPOV</h3>
+                    <p>Expert insights for technical practitioners.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../contribute.html">Contribute</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Top Topics</h4>
+                    <ul>
+                        <li><a href="llm-implementation.html">LLM Implementation</a></li>
+                        <li><a href="data-engineering.html">Data Engineering</a></li>
+                        <li><a href="mlops.html">MLOps</a></li>
+                        <li><a href="platform-engineering.html">Platform Engineering</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C14.39,9.94 13.4,10.46 12.92,11.24V10.13H10.13V18.5H12.92V13.57C12.92,12.8 13.54,12.17 14.31,12.17A1.4,1.4 0 0,1 15.71,13.57V18.5H18.5M6.88,8.56A1.68,1.68 0 0,0 8.56,6.88C8.56,5.95 7.81,5.19 6.88,5.19A1.69,1.69 0 0,0 5.19,6.88C5.19,7.81 5.95,8.56 6.88,8.56M8.27,18.5V10.13H5.5V18.5H8.27Z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TechPOV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
